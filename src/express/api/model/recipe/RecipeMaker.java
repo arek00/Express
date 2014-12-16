@@ -75,6 +75,16 @@ public class RecipeMaker {
         putFromIteratorToArray(additiveIterator,additives);
     }
 
+    public Ingredient getAdditive(int additiveIndex)
+    {
+        return additives.get(additiveIndex);
+    }
+
+    public Ingredient getIngredient(int ingredientIndex)
+    {
+        return ingredients.get(ingredientIndex);
+    }
+
     private <E>  void putFromIteratorToArray(Iterator<E> iterator, ArrayList<E> arrayList)
     {
         while(iterator.hasNext())

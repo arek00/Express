@@ -8,10 +8,17 @@ import java.util.Iterator;
  */
 public class RecipesSet {
 
+    private static RecipesSet instance = new RecipesSet();
+
     private ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 
-    public RecipesSet()
+    private RecipesSet()
     {
+    }
+
+    public static RecipesSet getInstance()
+    {
+        return instance;
     }
 
     public Recipe getRecipe(int recipeIndex)
@@ -26,6 +33,16 @@ public class RecipesSet {
 
     public void addRecipe(Recipe recipe)
     {
+        if(!recipe.getIngredients().hasNext())
+        {
+            throw new IllegalArgumentException("Ingredients can't be empty");
+        }
+
         recipes.add(recipe);
+    }
+
+    public int getNumberRecipes()
+    {
+        return recipes.size();
     }
 }

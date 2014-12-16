@@ -29,5 +29,14 @@ public class Recipe {
     {
         return additives.iterator();
     }
+    public int getIngredientsNumber()
+    {
+        return ingredients.size();
+    }
+
+    public int getAdditivesNumber()
+    {
+        return additives.size();
+    }
 
 }
