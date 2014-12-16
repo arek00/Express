@@ -15,6 +15,21 @@ import java.util.Iterator;
  */
 public class MachineController {
 
+    private static MachineController instance = new MachineController();
+
+    public static MachineController getInstance()
+    {
+        return instance;
+    }
+    private MachineController()
+    {
+        ingredientsSet = IngredientsSet.getInstance();
+        recipesSet = RecipesSet.getInstance();
+        recipeMaker = RecipeMaker.getInstance();
+        brewSequencePerformer = BrewSequencePerformer.getInstance();
+    }
+
+
     private IngredientsSet ingredientsSet;
     private RecipesSet recipesSet;
     private RecipeMaker recipeMaker;
@@ -55,5 +70,7 @@ public class MachineController {
     {
         sequence.perform();
     }
+
+
 
 }

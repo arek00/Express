@@ -9,6 +9,13 @@ import java.util.Iterator;
  */
 public class IngredientsSet {
 
+    private static IngredientsSet instance = new IngredientsSet();
+
+    public static IngredientsSet getInstance()
+    {
+        return instance;
+    }
+
     private HashMap<Integer,Ingredient> ingredients = new HashMap<Integer, Ingredient>();
 
     public IngredientsSet()
