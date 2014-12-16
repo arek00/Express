@@ -1,5 +1,8 @@
 package express.api.controller.device;
 
+import example.implementation.Exceptions.DeviceException;
+import example.implementation.Exceptions.LackOfIngredientException;
+
 /**
  * Created by Admin on 2014-12-14.
  */
@@ -17,5 +20,5 @@ public abstract class Device {
         return this.deviceId;
     }
 
-    public abstract void operate();
+    public abstract void operate() throws DeviceException;
 }

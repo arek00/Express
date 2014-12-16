@@ -7,6 +7,17 @@ import java.util.Iterator;
  */
 public class DevicesController {
 
+    private static DevicesController instance = new DevicesController();
+
+    private DevicesController(){
+
+    }
+
+    public static DevicesController getInstance()
+    {
+        return instance;
+    }
+
     private Devices devices;
 
     public DevicesController(Devices devices)

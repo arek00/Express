@@ -2,6 +2,8 @@ package express.api.controller.machine;
 
 import express.api.controller.brew.BrewProcessSequence;
 import express.api.controller.brew.BrewSequencePerformer;
+import express.api.controller.device.Device;
+import express.api.controller.device.DevicesController;
 import express.api.model.ingredient.Ingredient;
 import express.api.model.ingredient.IngredientsSet;
 import express.api.model.recipe.Recipe;
@@ -27,6 +29,7 @@ public class MachineController {
         recipesSet = RecipesSet.getInstance();
         recipeMaker = RecipeMaker.getInstance();
         brewSequencePerformer = BrewSequencePerformer.getInstance();
+        devicesController = DevicesController.getInstance();
     }
 
 
@@ -34,6 +37,7 @@ public class MachineController {
     private RecipesSet recipesSet;
     private RecipeMaker recipeMaker;
     private BrewSequencePerformer brewSequencePerformer;
+    private DevicesController devicesController;
 
 
     public Ingredient getIngredient(int containerId)
@@ -71,6 +75,20 @@ public class MachineController {
         sequence.perform();
     }
 
+    public void addDevice(Device device)
+    {
+        devicesController.addDevice(device);
+    }
+
+    public Device getDevice(int deviceId)
+    {
+        return devicesController.getDeviceById(deviceId);
+    }
+
+    public Iterator<Device> getAllDevices()
+    {
+        return devicesController.getAllDevices();
+    }
 
 
 }

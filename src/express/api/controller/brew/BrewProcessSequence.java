@@ -18,4 +18,14 @@ public abstract class BrewProcessSequence {
 
     public abstract void perform();
 
+    public DevicesController getController()
+    {
+        return controller;
+    }
+
+    public Recipe getRecipe()
+    {
+        return recipe;
+    }
+
 }
