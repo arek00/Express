@@ -1,7 +1,10 @@
 package example.implementation.Sequences;
 
+import example.implementation.devices.Grinder;
 import express.api.controller.brew.BrewProcessSequence;
+import express.api.controller.device.Device;
 import express.api.controller.device.DevicesController;
+import express.api.model.ingredient.Granular;
 import express.api.model.ingredient.Ingredient;
 import express.api.model.recipe.Recipe;
 
@@ -29,7 +32,17 @@ public class DefaultSequence extends BrewProcessSequence {
         {
             ingredient = iterator.next();
 
-            
+
+
+            if(ingredient instanceof Granular)
+            {
+                if(! ((Granular) ingredient).isGrounded())
+                {
+                    Device device = getController().getDeviceById(4);
+                    ((Grinder)device).setIngredientToGrind(ingredient);
+                }
+            }
+
 
         }
 

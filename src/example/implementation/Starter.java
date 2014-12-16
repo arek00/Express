@@ -10,6 +10,11 @@ public class Starter {
     public static void main(String[] args)
     {
         MachineController controller = MachineController.getInstance();
+        Initializer.initialize();
+
+        //parzenie kawy
+
+
 
 
     }
