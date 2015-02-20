@@ -7,10 +7,10 @@ import java.util.*;
  */
 public class Devices {
 
-    private Map<Integer, Device> devicesCollection;
+    private Map<String, Device> devicesCollection;
 
     public Devices() {
-        devicesCollection = new HashMap<Integer, Device>();
+        devicesCollection = new HashMap<String, Device>();
     }
 
     public Device getDeviceById(int deviceId) {
@@ -22,7 +22,7 @@ public class Devices {
     }
 
     public void addDevice(Device device) {
-        devicesCollection.put(device.getDeviceId(),device);
+        devicesCollection.put(device.getName(),device);
     }
 
 

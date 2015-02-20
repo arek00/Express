@@ -24,6 +24,19 @@ public class Containers {
         containers.add(container);
     }
 
+    public void removeContainer(Container container) {
+        validateArgument(container);
+        containers.remove(container);
+    }
+
+    public void removeContainer(int containerIndex) {
+        containers.remove(containerIndex);
+    }
+
+    public int getContainersNumber() {
+        return containers.size();
+    }
+
     /**
      * Get a list of all currently stored containers instances.
      *

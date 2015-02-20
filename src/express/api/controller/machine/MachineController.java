@@ -14,7 +14,13 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * Created by Admin on 2014-12-14.
+ * Machine controller is a set of functions that let simplify usage of Express data's model API.
+ * Machine controller is facade that contains methods to use basic functionality, mainly on Express' data structure
+ * like sets of devices or recipes. It also let performs a brewing strategy.
+ *
+ * You should take an instance by calling getInstance() method as it is singleton class, there should be only single
+ * representation of class in runtime.
+ *
  */
 public class MachineController {
 

@@ -2,13 +2,6 @@ package express.api.model.ingredient;
 
 import java.util.*;
 
-/**
- * Created by Admin on 2014-12-14.
- */
-
-/*
- *  This may become unnecessary because Containers class.
- */
 public class Ingredients {
 
     private static Ingredients instance = new Ingredients();

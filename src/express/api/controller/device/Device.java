@@ -8,5 +8,5 @@ import express.api.exceptions.DeviceException;
 
 public interface Device{
     public void perform() throws DeviceException;
-    public int getDeviceId();
+    public String getName();
 }

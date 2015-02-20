@@ -1,31 +1,32 @@
 package express.api.model.ingredient;
 
+import express.api.controller.containers.Container;
+
 /**
  * Created by Admin on 2014-12-14.
  */
-public class Granular extends Ingredient{
+public class Granular extends Ingredient {
 
     private boolean grounded;
 
-    public Granular(String name, int containerId)
-    {
-        super(name,containerId);
+    public Granular(String name, Container container) {
+        super(name, container);
         this.grounded = false;
     }
 
     /**
-     * @return Tells that granular is already grounded.
+     * Get information about ingredient is already grounded.
+     *
+     * @return Logical value if ingredient is grounded or not.
      */
-    public boolean isGrounded()
-    {
+    public boolean isGrounded() {
         return this.grounded;
     }
 
     /**
-     * Set parameter if granular ingredient has to be ground.
+     * Set parameter if granular ingredient is/isn't grounded.
      */
-    public void setGrounded(boolean isGrounded)
-    {
+    public void setGrounded(boolean isGrounded) {
         this.grounded = isGrounded;
     }
 

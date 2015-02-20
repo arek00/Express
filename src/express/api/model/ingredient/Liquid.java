@@ -1,5 +1,7 @@
 package express.api.model.ingredient;
 
+import express.api.controller.containers.Container;
+
 /**
  * Created by Admin on 2014-12-14.
  */
@@ -8,9 +10,9 @@ public class Liquid extends Ingredient {
     private int temperature;
     private int pressure;
 
-    public Liquid(String name, int containerId)
+    public Liquid(String name, Container container)
     {
-        super(name, containerId);
+        super(name, container);
 
         this.temperature = 0;
         this.pressure = 0;
@@ -29,7 +31,7 @@ public class Liquid extends Ingredient {
      */
     public void setTemperature(int temperature) {
 
-        checkArgument(temperature);
+        validateArgument(temperature);
         this.temperature = temperature;
     }
 
@@ -46,7 +48,7 @@ public class Liquid extends Ingredient {
      */
     public void setPressure(int pressure) {
 
-        checkArgument(pressure);
+        validateArgument(pressure);
         this.pressure = pressure;
     }
 }

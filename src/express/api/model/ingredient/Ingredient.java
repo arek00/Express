@@ -11,7 +11,7 @@ public class Ingredient {
     protected Container container;
     protected int amount;
 
-    public Ingredient(String name, int containerId) {
+    public Ingredient(String name, Container container) {
         this.name = name;
         this.amount = 0;
     }
@@ -44,15 +44,15 @@ public class Ingredient {
     /**
      * Set amount of ingredient that must be use in recipe.
      *
-     * @param amount Amount of ingredient in recipe
+     * @param amount Amount of ingredient in recipe, greater than 0
      */
     public void setAmount(int amount) {
-        validationAmount(amount);
+        validateArgument(amount);
         this.amount = amount;
     }
 
 
-    protected void validationAmount(int arg) {
+    protected void validateArgument(int arg) {
         if (arg < 0) {
             throw new IllegalArgumentException("Amount can't be less than 0");
         }
