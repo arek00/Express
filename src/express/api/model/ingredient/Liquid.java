@@ -16,20 +16,34 @@ public class Liquid extends Ingredient {
         this.pressure = 0;
     }
 
+    /**
+     * @return Temperature that liquid ingredient has to be warm.
+     */
     public int getTemperature() {
         return temperature;
     }
 
+    /**
+     * Set temperature of liquid ingredient has to be warm.
+     * @param temperature
+     */
     public void setTemperature(int temperature) {
 
         checkArgument(temperature);
         this.temperature = temperature;
     }
 
+    /**
+     * @return Pressure that ingredient must be pump with.
+     */
     public int getPressure() {
         return pressure;
     }
 
+    /**
+     * Set pressure that ingredient must be pump with.
+     * @param pressure
+     */
     public void setPressure(int pressure) {
 
         checkArgument(pressure);

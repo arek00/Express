@@ -1,5 +1,6 @@
 package express.api.controller.device;
 
+import java.util.Collection;
 import java.util.Iterator;
 
 /**
@@ -8,35 +9,34 @@ import java.util.Iterator;
 public class DevicesController {
 
     private static DevicesController instance = new DevicesController();
+    private Devices devices;
 
-    private DevicesController(){
-
+    private DevicesController () {
+        devices = new Devices();
     }
 
-    public static DevicesController getInstance()
-    {
+    /**
+     * @return instance of DevicesController
+     */
+    public static DevicesController getInstance() {
         return instance;
     }
 
-    private Devices devices;
-
-    public DevicesController(Devices devices)
-    {
-        this.devices = devices;
-    }
-
-    public Device getDeviceById(int deviceId)
-    {
+    /**
+     * Returns device by its ID.
+     *
+     * @param deviceId
+     * @return Device with ID deviceId
+     */
+    public Device getDeviceById(int deviceId) {
         return devices.getDeviceById(deviceId);
     }
 
-    public Iterator<Device> getAllDevices()
-    {
+    public Collection<Device> getAllDevices() {
         return devices.getAllDevices();
     }
 
-    public void addDevice(Device device)
-    {
+    public void addDevice(Device device) {
         devices.addDevice(device);
     }
 

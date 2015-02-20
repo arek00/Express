@@ -1,36 +1,42 @@
 package tests.express.api.model.ingredient;
 
-import express.api.model.ingredient.Granular;
 import express.api.model.ingredient.Ingredient;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class IngredientTest {
 
-    String ingredientName = "Kawa";
-    int containerId = 1;
+    private static Ingredient ingredient;
 
-    Ingredient ingredient = new Granular(ingredientName, containerId);
-
-    @Test
-    public void instanceShouldBeInitialized()
-    {
-        assertTrue(ingredient.getName().equals(ingredientName));
-        assertTrue(ingredient.getContainerId() == containerId);
+    @BeforeClass
+    public static void init() {
+        ingredient = new Ingredient("Składnik", 10);
     }
 
 
     @Test
-    public void amountShouldBeZero()
-    {
-        assertTrue(ingredient.getAmount() == 0);
+    public void shouldGetValues() {
+        String name = ingredient.getName();
+
+        assertFalse(name.isEmpty());
+        assertTrue(name.equals("Składnik"));
+
+        ingredient.setAmount(0);
+        assertEquals(0, ingredient.getAmount());
+        assertEquals(10, ingredient.getContainerId());
+
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void amountShouldntBeLesserThanZero()
+    public void setAmountTest()
     {
+        ingredient.setAmount(10);
+        assertEquals(10, ingredient.getAmount());
+
         ingredient.setAmount(-1);
-        assertFalse(ingredient.getAmount() >= 0);
     }
+
+
 }

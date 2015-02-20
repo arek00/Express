@@ -5,81 +5,97 @@ import express.api.model.ingredient.Ingredient;
 import express.api.model.ingredient.Liquid;
 import express.api.model.recipe.Recipe;
 import express.api.model.recipe.RecipeMaker;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Collection;
 
 import static org.junit.Assert.*;
 
 public class RecipeMakerTest {
 
-    static RecipeMaker recipeMaker = RecipeMaker.getInstance();
-    static ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
-    static ArrayList<Ingredient> additives = new ArrayList<Ingredient>();
+    private static RecipeMaker recipeMaker;
+    private int ingredientsAmount;
+    private int additivesAmount;
 
-    @Before
-    public void initialize()
-    {
-        recipeMaker.clearRecipe();
-        recipeMaker.addIngredient(new Granular("Kawa",1));
-        recipeMaker.addIngredient(new Liquid("Woda",2));
-        recipeMaker.addAdditive(new Granular("Cukier",4));
+    @BeforeClass
+    public static void init() {
+        recipeMaker = RecipeMaker.getInstance();
     }
 
     @Test
-    public void shouldMadeRecipe()
-    {
-        Recipe recipe = recipeMaker.createRecipe();
-
-        assertTrue(recipe.getAdditivesNumber() > 0);
-        assertTrue(recipe.getIngredientsNumber() > 0);
+    public void shouldAddIngredients() {
+        fillRecipeMaker();
+        ingredientsAmount = recipeMaker.getAllIngredients().size();
+        additivesAmount = recipeMaker.getAllAdditives().size();
+        assertEquals(2, ingredientsAmount);
+        assertEquals(2, additivesAmount);
     }
 
     @Test
-    public void shouldRemove()
+    public void shouldRemoveIngredients()
     {
-        Ingredient additive = recipeMaker.getAdditive(0);
+        fillRecipeMaker();
+        ingredientsAmount = recipeMaker.getAllIngredients().size();
+        additivesAmount = recipeMaker.getAllAdditives().size();
+
+        assertTrue(ingredientsAmount > 0);
+        assertTrue(additivesAmount > 0);
+
+        recipeMaker.removeIngredient(0);
         recipeMaker.removeAdditive(0);
 
-        assertFalse(recipeMaker.getAdditive(0) == additive);
+        assertEquals(ingredientsAmount - 1,recipeMaker.getAllIngredients().size());
+        assertEquals(additivesAmount - 1, recipeMaker.getAllAdditives().size());
 
-        Ingredient ingredient = recipeMaker.getIngredient(0);
-        recipeMaker.removeIngredient(0);
+        recipeMaker.clearRecipe();
 
-        assertFalse(recipeMaker.getIngredient(0) == ingredient);
+        assertEquals(0, recipeMaker.getAllIngredients().size());
+        assertEquals(0, recipeMaker.getAllAdditives().size());
+
+    }
+
+
+
+    private void fillRecipeMaker()
+    {
+        recipeMaker.addIngredient(new Liquid("Woda", 10));
+        recipeMaker.addIngredient(new Granular("Cukier", 11));
+
+        recipeMaker.addAdditive(new Liquid("Mleko", 7));
+        recipeMaker.addAdditive(new Granular("Mleko w proszku", 8));
+
     }
 
     @Test
-    public void setIngredientsFromRecipe()
+    public void setFromRecipe()
     {
-        ingredients.add(new Liquid("Woda",1));
-        ingredients.add(new Liquid("Mleko",2));
+        ArrayList<Ingredient> ingredients;
+        ArrayList<Ingredient> additives;
 
-        additives.add(new Liquid("Mleko",3));
-        additives.add(new Granular("Cukier",4));
+        ingredients = new ArrayList<Ingredient>();
+        additives = new ArrayList<Ingredient>();
 
-        Recipe recipe = new Recipe(ingredients,additives);
+        ingredients.add(new Granular("Kawa", 0));
+        ingredients.add(new Granular("Kakao", 1));
+        ingredients.add(new Liquid("Woda", 2));
+
+        additives.add(new Granular("Cukier", 3));
+        additives.add(new Granular("Posypka", 4));
+        additives.add(new Liquid("Mleko", 5));
+
+        Recipe recipe = new Recipe(ingredients, additives);
+
 
         recipeMaker.setIngredientsFromRecipe(recipe);
 
-        Iterator<Ingredient> recipeIterator = recipe.getIngredients();
-        Iterator<Ingredient> makerIterator = recipeMaker.getAllIngredients();
+        Collection<Ingredient> recipeMakerCollection = recipeMaker.getAllIngredients();
 
-        while(recipeIterator.hasNext() || makerIterator.hasNext())
-        {
-            assertTrue(recipeIterator.next() == makerIterator.next());
-        }
+        assertTrue(recipeMaker.getAllAdditives().size() == additives.size());
+        assertTrue(recipeMaker.getAllIngredients().size() == ingredients.size());
 
-        recipeIterator = recipe.getAdditives();
-        makerIterator = recipeMaker.getAllAdditives();
-
-        while(recipeIterator.hasNext() || makerIterator.hasNext())
-        {
-            assertTrue(recipeIterator.next() == makerIterator.next());
-        }
     }
 
 }

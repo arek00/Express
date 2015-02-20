@@ -1,46 +1,60 @@
 package express.api.model.ingredient;
 
+import express.api.controller.containers.Container;
+
 /**
  * Created by Admin on 2014-12-14.
  */
 public class Ingredient {
 
-    private String name;
-    private int containerId;
-    private int amount;
+    protected String name;
+    protected Container container;
+    protected int amount;
 
-    public Ingredient(String name, int containerId)
-    {
+    public Ingredient(String name, int containerId) {
         this.name = name;
-        this.containerId = containerId;
         this.amount = 0;
     }
 
-
+    /**
+     * @return name of ingredient.
+     */
     public String getName() {
         return name;
     }
 
-    public int getContainerId() {
-        return containerId;
+    /**
+     * Get reference to container that stores this ingredient.
+     *
+     * @return reference of container
+     */
+    public Container getContainer() {
+        return container;
     }
 
+    /**
+     * Get current amount of ingredient that will be used in recipe.
+     *
+     * @return amount of ingredient that must be take to recipe
+     */
     public int getAmount() {
         return amount;
     }
 
+    /**
+     * Set amount of ingredient that must be use in recipe.
+     *
+     * @param amount Amount of ingredient in recipe
+     */
     public void setAmount(int amount) {
-
-        checkArgument(amount);
+        validationAmount(amount);
         this.amount = amount;
     }
 
 
-    protected void checkArgument(int arg)
-    {
-        if(arg < 0)
-        {
-            throw new IllegalArgumentException("Argument can't be less than 0");
+    protected void validationAmount(int arg) {
+        if (arg < 0) {
+            throw new IllegalArgumentException("Amount can't be less than 0");
         }
     }
 

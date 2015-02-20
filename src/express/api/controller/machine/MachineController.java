@@ -1,15 +1,16 @@
 package express.api.controller.machine;
 
-import express.api.controller.brew.BrewProcessSequence;
-import express.api.controller.brew.BrewSequencePerformer;
+import express.api.controller.brew.BrewSequence;
 import express.api.controller.device.Device;
 import express.api.controller.device.DevicesController;
+import express.api.exceptions.DeviceException;
 import express.api.model.ingredient.Ingredient;
-import express.api.model.ingredient.IngredientsSet;
+import express.api.model.ingredient.Ingredients;
 import express.api.model.recipe.Recipe;
 import express.api.model.recipe.RecipeMaker;
-import express.api.model.recipe.RecipesSet;
+import express.api.model.recipe.Recipes;
 
+import java.util.Collection;
 import java.util.Iterator;
 
 /**
@@ -19,76 +20,59 @@ public class MachineController {
 
     private static MachineController instance = new MachineController();
 
-    public static MachineController getInstance()
-    {
+    public static MachineController getInstance() {
         return instance;
     }
-    private MachineController()
-    {
-        ingredientsSet = IngredientsSet.getInstance();
-        recipesSet = RecipesSet.getInstance();
-        recipeMaker = RecipeMaker.getInstance();
-        brewSequencePerformer = BrewSequencePerformer.getInstance();
-        devicesController = DevicesController.getInstance();
-    }
 
 
-    private IngredientsSet ingredientsSet;
-    private RecipesSet recipesSet;
-    private RecipeMaker recipeMaker;
-    private BrewSequencePerformer brewSequencePerformer;
     private DevicesController devicesController;
+    private Ingredients ingredients;
+    private Recipes recipes;
 
-
-    public Ingredient getIngredient(int containerId)
-    {
-        return ingredientsSet.getIngredient(containerId);
+    private MachineController() {
+        devicesController = DevicesController.getInstance();
+        ingredients = Ingredients.getInstance();
+        recipes = Recipes.getInstance();
     }
 
-    public Iterator<Ingredient> getAllIngredients()
-    {
-        return ingredientsSet.getAllIngredients();
+    public Ingredient getIngredient(int containerId) {
+        return ingredients.getIngredient(containerId);
     }
 
-    public void addIngredient(Ingredient ingredient)
-    {
-        ingredientsSet.addIngredient(ingredient);
+    public Collection<Ingredient> getAllIngredients() {
+        return ingredients.getAllIngredients();
     }
 
-    public Recipe getRecipe(int recipeNumber)
-    {
-        return recipesSet.getRecipe(recipeNumber);
+    public void addIngredient(Ingredient ingredient) {
+        ingredients.addIngredient(ingredient);
     }
 
-    public Iterator<Recipe> getAllRecipes()
-    {
-        return recipesSet.getAllRecipes();
+    public Recipe getRecipe(int recipeNumber) {
+        return recipes.getRecipe(recipeNumber);
     }
 
-    public void addRecipe(Recipe recipe)
-    {
-        recipesSet.addRecipe(recipe);
+    public Collection<Recipe> getAllRecipes() {
+        return recipes.getAllRecipes();
     }
 
-    public void performBrewProcessSequence(BrewProcessSequence sequence)
-    {
+    public void addRecipe(Recipe recipe) {
+        recipes.addRecipe(recipe);
+    }
+
+    public void performBrewSequence(BrewSequence sequence) throws DeviceException {
         sequence.perform();
     }
 
-    public void addDevice(Device device)
-    {
+    public void addDevice(Device device) {
         devicesController.addDevice(device);
     }
 
-    public Device getDevice(int deviceId)
-    {
+    public Device getDevice(int deviceId) {
         return devicesController.getDeviceById(deviceId);
     }
 
-    public Iterator<Device> getAllDevices()
-    {
+    public Collection<Device> getAllDevices() {
         return devicesController.getAllDevices();
     }
-
 
 }

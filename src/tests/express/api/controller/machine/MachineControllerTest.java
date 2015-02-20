@@ -1,54 +1,56 @@
 package tests.express.api.controller.machine;
 
+import example.impl.DevicesIds;
 import express.api.controller.machine.MachineController;
 import express.api.model.ingredient.Granular;
 import express.api.model.ingredient.Ingredient;
 import express.api.model.ingredient.Liquid;
 import express.api.model.recipe.Recipe;
+import express.api.model.recipe.RecipeMaker;
+import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
 public class MachineControllerTest {
 
-    private MachineController controller = MachineController.getInstance();
+    private static MachineController controller;
 
-    @Test
-    public void addIngredientToSet() {
-
-        Ingredient ingredient = new Granular("Cukier",7);
-        controller.addIngredient(ingredient);
-
-        assertTrue(controller.getIngredient(7) == ingredient );
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void setIngredientsWithSameId()
+    @BeforeClass
+    public static void init()
     {
-        Ingredient ingredient = new Granular("Cukier",10);
-        controller.addIngredient(ingredient);
-        ingredient = new Liquid("Mleko",10);
-        controller.addIngredient(ingredient);
+        controller = MachineController.getInstance();
     }
 
     @Test
     public void addRecipeTest()
     {
-        ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
-        ArrayList<Ingredient> addictives = new ArrayList<Ingredient>();
+        Ingredient milk = new Liquid("Mleko", DevicesIds.MILK_CONTAINER.getValue());
+        Ingredient coffee = new Granular("Kawa", DevicesIds.COFFEE_CONTAINER.getValue());
+        Ingredient sugar = new Granular("Cukier", DevicesIds.SUGAR_CONTAINER.getValue());
 
-        ingredients.add(new Granular("Cukier",1));
-        ingredients.add(new Liquid("Woda",2));
+        RecipeMaker recipeMaker = RecipeMaker.getInstance();
+        recipeMaker.addIngredient(milk);
+        recipeMaker.addAdditive(sugar);
 
-        addictives.add(new Granular("Posypka",3));
+        controller.addRecipe(recipeMaker.createRecipe());
 
-        Recipe recipe = new Recipe(ingredients,addictives);
+        assertTrue(controller.getAllRecipes().isEmpty());
 
-        controller.addRecipe(recipe);
+        recipeMaker.clearRecipe();
 
-        assertTrue(controller.getRecipe(0) == recipe);
+        assertTrue(controller.getAllRecipes().size() > 0);
+
+        recipeMaker.addIngredient(coffee);
+        recipeMaker.addAdditive(milk);
+        controller.addRecipe(recipeMaker.createRecipe());
+
+
+        Recipe recipe = controller.getRecipe(0);
+
+        assertNotNull(recipe);
+
+        assertTrue(controller.getAllIngredients().size() > 0);
 
     }
 

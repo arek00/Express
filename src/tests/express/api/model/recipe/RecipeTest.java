@@ -4,56 +4,60 @@ import express.api.model.ingredient.Granular;
 import express.api.model.ingredient.Ingredient;
 import express.api.model.ingredient.Liquid;
 import express.api.model.recipe.Recipe;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 
 import static org.junit.Assert.*;
 
 public class RecipeTest {
 
-    Recipe recipe;
-    ArrayList<Ingredient> ingredients;
-    ArrayList<Ingredient> additives;
+    private static Recipe recipe;
+    private static ArrayList<Ingredient> ingredients;
+    private static ArrayList<Ingredient> additives;
 
-    @Before
-    public void initialize()
-    {
+
+    @BeforeClass
+    public static void init() {
         ingredients = new ArrayList<Ingredient>();
-        ingredients.add(new Granular("Kawa",1));
-        ingredients.add(new Granular("Cappuccino",2));
-        ingredients.add(new Liquid("Woda",3));
-
         additives = new ArrayList<Ingredient>();
-        additives.add(new Granular("Cukier",4));
-        additives.add(new Liquid("Mleko",5));
-        additives.add(new Liquid("Śmietanka",6));
+
+        ingredients.add(new Granular("Kawa", 0));
+        ingredients.add(new Granular("Kakao", 1));
+        ingredients.add(new Liquid("Woda", 2));
+
+        additives.add(new Granular("Cukier", 3));
+        additives.add(new Granular("Posypka", 4));
+        additives.add(new Liquid("Mleko", 5));
 
         recipe = new Recipe(ingredients, additives);
     }
 
     @Test
-    public void ingredientsListShouldntBeEmpty()
-    {
-        Iterator<Ingredient> ingredientIterator = recipe.getIngredients();
-        assertTrue(ingredientIterator.hasNext());
+    public void getIngredientsCollections() {
+        Collection<Ingredient> returnedIngredients = recipe.getIngredients();
+        Collection<Ingredient> returnedAdditives = recipe.getAdditives();
+
+        assertEquals(returnedIngredients.size(), recipe.getIngredientsNumber());
+        assertEquals(returnedAdditives.size(), recipe.getAdditivesNumber());
+
+        Iterator<Ingredient> returnedIterator = returnedAdditives.iterator();
+        Iterator<Ingredient> ingredientIterator = recipe.getAdditives().iterator();
+
+        while (returnedIterator.hasNext()) {
+            assertTrue(returnedIterator.next() == ingredientIterator.next());
+        }
+
+        returnedIterator = returnedIngredients.iterator();
+        ingredientIterator = recipe.getIngredients().iterator();
+
+        while (returnedIterator.hasNext()) {
+            assertTrue(returnedIterator.next() == ingredientIterator.next());
+        }
     }
 
-    @Test
-    public void additivesListShouldntBeEmpty()
-    {
-        Iterator<Ingredient> additivesIterator = recipe.getAdditives();
 
-       assertTrue(additivesIterator.hasNext());
-    }
-
-
-    @Test
-    public void additivesHasThreeElements()
-    {
-        assertTrue(additives.size() == 3);
-    }
 }

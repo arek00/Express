@@ -3,7 +3,9 @@ package express.api.model.recipe;
 import express.api.model.ingredient.Ingredient;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by Admin on 2014-12-14.
@@ -13,8 +15,8 @@ public class RecipeMaker {
     private static RecipeMaker instance = new RecipeMaker();
 
 
-    private ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
-    private ArrayList<Ingredient> additives = new ArrayList<Ingredient>();
+    private List<Ingredient> ingredients = new ArrayList<Ingredient>();
+    private List<Ingredient> additives = new ArrayList<Ingredient>();
 
     private RecipeMaker()
     {
@@ -56,23 +58,22 @@ public class RecipeMaker {
         return new Recipe(ingredients,additives);
     }
 
-    public Iterator<Ingredient> getAllIngredients()
+    public Collection<Ingredient> getAllIngredients()
     {
-        return ingredients.iterator();
+        return ingredients;
     }
 
-    public Iterator<Ingredient> getAllAdditives()
+    public Collection<Ingredient> getAllAdditives()
     {
-        return additives.iterator();
+        return additives;
     }
 
     public void setIngredientsFromRecipe(Recipe recipe)
     {
-        Iterator<Ingredient> ingredientIterator = recipe.getIngredients();
-        Iterator<Ingredient> additiveIterator = recipe.getAdditives();
+        clearRecipe();
 
-        putFromIteratorToArray(ingredientIterator,ingredients);
-        putFromIteratorToArray(additiveIterator,additives);
+        ingredients.addAll(recipe.getIngredients());
+        additives.addAll(recipe.getAdditives());
     }
 
     public Ingredient getAdditive(int additiveIndex)
@@ -84,13 +85,4 @@ public class RecipeMaker {
     {
         return ingredients.get(ingredientIndex);
     }
-
-    private <E>  void putFromIteratorToArray(Iterator<E> iterator, ArrayList<E> arrayList)
-    {
-        while(iterator.hasNext())
-        {
-            arrayList.add(iterator.next());
-        }
-    }
-
 }
