@@ -1,5 +1,6 @@
 package express.api.model.recipe;
 
+import express.api.converter.IteratorConverter;
 import express.api.model.ingredient.Ingredient;
 
 import java.util.ArrayList;
@@ -18,71 +19,64 @@ public class RecipeMaker {
     private List<Ingredient> ingredients = new ArrayList<Ingredient>();
     private List<Ingredient> additives = new ArrayList<Ingredient>();
 
-    private RecipeMaker()
-    {
+    private RecipeMaker() {
     }
 
-    public static RecipeMaker getInstance()
-    {
+    public static RecipeMaker getInstance() {
         return RecipeMaker.instance;
     }
 
-    public void addIngredient(Ingredient ingredient)
-    {
+    public void addIngredient(Ingredient ingredient) {
         ingredients.add(ingredient);
     }
 
-    public void addAdditive(Ingredient additive)
-    {
+    public void addAdditive(Ingredient additive) {
         additives.add(additive);
     }
 
-    public void removeIngredient(int ingredientNumber)
-    {
+    public void removeIngredient(int ingredientNumber) {
         ingredients.remove(ingredientNumber);
     }
 
-    public void removeAdditive(int additiveNumber)
-    {
+    public void removeAdditive(int additiveNumber) {
         additives.remove(additiveNumber);
     }
 
-    public void clearRecipe()
-    {
+    public void clearRecipe() {
         ingredients.clear();
         additives.clear();
     }
 
-    public Recipe createRecipe()
-    {
-        return new Recipe(ingredients,additives);
+    public Recipe createRecipe() {
+        return new Recipe(ingredients, additives);
     }
 
-    public Collection<Ingredient> getAllIngredients()
-    {
-        return ingredients;
+    public Iterator<Ingredient> getAllIngredients() {
+        return ingredients.iterator();
     }
 
-    public Collection<Ingredient> getAllAdditives()
-    {
-        return additives;
+    public Iterator<Ingredient> getAllAdditives() {
+        return additives.iterator();
     }
 
-    public void setIngredientsFromRecipe(Recipe recipe)
-    {
+    public void setIngredientsFromRecipe(Recipe recipe) {
+        Collection<Ingredient> copyCollection;
         clearRecipe();
 
-        ingredients.addAll(recipe.getIngredients());
-        additives.addAll(recipe.getAdditives());
+        copyCollection = IteratorConverter.toCollection(recipe.getIngredients());
+        ingredients.addAll(copyCollection);
+
+        copyCollection = IteratorConverter.toCollection(recipe.getAdditives());
+        additives.addAll(copyCollection);
     }
 
-    public Ingredient getAdditive(int additiveIndex)
-    {
+    public Ingredient getAdditive(int additiveIndex) {
         return additives.get(additiveIndex);
     }
 
-    public Ingredient getIngredient(int ingredientIndex)
-    {
+    public Ingredient getIngredient(int ingredientIndex) {
         return ingredients.get(ingredientIndex);
     }
+
+
 }

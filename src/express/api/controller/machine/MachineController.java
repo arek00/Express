@@ -57,8 +57,8 @@ public class MachineController {
         return recipes.getRecipe(recipeNumber);
     }
 
-    public Collection<Recipe> getAllRecipes() {
-        return recipes.getAllRecipes();
+    public Iterator<Recipe> getAllRecipes() {
+        return recipes.getRecipes();
     }
 
     public void addRecipe(Recipe recipe) {

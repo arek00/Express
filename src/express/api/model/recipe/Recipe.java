@@ -12,6 +12,7 @@ import java.util.List;
  */
 public class Recipe {
 
+    private String recipeName;
     private List<Ingredient> ingredients = new ArrayList<Ingredient>();
     private List<Ingredient> additives = new ArrayList<Ingredient>();
 

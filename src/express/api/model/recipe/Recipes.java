@@ -18,7 +18,6 @@ public class Recipes {
     }
 
     /**
-     *
      * @return Instance of Recipes Collection
      */
     public static Recipes getInstance() {
@@ -30,20 +29,21 @@ public class Recipes {
     }
 
     /**
-     * Get all recipes from Collection of recipes.
+     * Get iterator to all recipes.
      *
-     * @return Collection of recipes
+     * @return Iterator of recipes.
      */
-    public Collection<Recipe> getAllRecipes() {
-        return recipes;
+    public Iterator<Recipe> getRecipes() {
+        return recipes.iterator();
     }
 
     /**
      * Add recipe to collection of recipes.
+     *
      * @param recipe Recipe that must be collected in.
      */
     public void addRecipe(Recipe recipe) {
-        if (recipe.getIngredients().isEmpty()) {
+        if (!recipe.getIngredients().hasNext()) {
             throw new IllegalArgumentException("Ingredients can't be empty");
         }
 
