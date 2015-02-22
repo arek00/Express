@@ -7,23 +7,28 @@ import java.util.*;
  */
 public class Devices {
 
-    private Map<String, Device> devicesCollection;
+    private static Devices instance = new Devices();
 
-    public Devices() {
-        devicesCollection = new HashMap<String, Device>();
+    public static Devices getInstance() {
+        return instance;
     }
 
-    public Device getDeviceById(int deviceId) {
-        return devicesCollection.get(deviceId);
+    private Devices() {
     }
 
-    public Collection<Device> getAllDevices() {
-        return devicesCollection.values();
+    private Map<String, Device> devices = new HashMap<String, Device>();
+
+    public Device getDeviceByName(String deviceName) {
+        return devices.get(deviceName);
+    }
+
+    public Iterator<Device> getDevices() {
+
+        Collection<Device> devicesCollection = devices.values();
+        return devicesCollection.iterator();
     }
 
     public void addDevice(Device device) {
-        devicesCollection.put(device.getName(),device);
+        devices.put(device.getName(), device);
     }
-
-
 }

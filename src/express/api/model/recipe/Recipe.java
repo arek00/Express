@@ -20,12 +20,12 @@ public class Recipe {
         this.additives.addAll(additives);
     }
 
-    public Collection<Ingredient> getIngredients() {
-        return ingredients;
+    public Iterator<Ingredient> getIngredients() {
+        return ingredients.iterator();
     }
 
-    public Collection<Ingredient> getAdditives() {
-        return additives;
+    public Iterator<Ingredient> getAdditives() {
+        return additives.iterator();
     }
 
     public int getIngredientsNumber() {

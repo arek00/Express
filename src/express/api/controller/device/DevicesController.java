@@ -4,14 +4,14 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * Created by Admin on 2014-12-14.
+ * Facade on Devices set. May be not necessary.
  */
 public class DevicesController {
 
     private static DevicesController instance = new DevicesController();
     private Devices devices;
 
-    private DevicesController () {
+    private DevicesController() {
         devices = new Devices();
     }
 
@@ -25,20 +25,18 @@ public class DevicesController {
     /**
      * Returns device by its ID.
      *
-     * @param deviceId
+     * @param deviceName
      * @return Device with ID deviceId
      */
-    public Device getDeviceById(int deviceId) {
-        return devices.getDeviceById(deviceId);
+    public Device getDeviceByName(String deviceName) {
+        return devices.getDeviceByName(deviceName);
     }
 
-    public Collection<Device> getAllDevices() {
-        return devices.getAllDevices();
+    public Iterator<Device> getDevices() {
+        return devices.getDevices();
     }
 
     public void addDevice(Device device) {
         devices.addDevice(device);
     }
-
-
 }

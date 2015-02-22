@@ -2,17 +2,29 @@ package express.api.controller.containers;
 
 import express.api.model.ingredient.Ingredient;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Admin on 2015-02-19.
  */
 public class Containers {
 
+    private static Containers instance = new Containers();
 
-    private List<Container> containers = new ArrayList<Container>();
+
+    /**
+     * Singleton.
+     *
+     * @return instance of Containers set.
+     */
+    public static Containers getInstance() {
+        return instance;
+    }
+
+    private Containers() {
+    }
+
+    private Map<String, Container> containers = new HashMap<String, Container>();
 
     /**
      * Add container to current set of containers
@@ -21,47 +33,57 @@ public class Containers {
      */
     public void addContainer(Container container) {
         validateArgument(container);
-        containers.add(container);
+        containers.put(container.getName(), container);
     }
 
+    /**
+     * Remove container by reference of itself
+     *
+     * @param container Instance of container to remove from set.
+     */
     public void removeContainer(Container container) {
         validateArgument(container);
-        containers.remove(container);
+        removeContainer(container.getName());
     }
 
-    public void removeContainer(int containerIndex) {
-        containers.remove(containerIndex);
+    /**
+     * Remove container by its name.
+     *
+     * @param containerName Name of container to remove.
+     */
+    public void removeContainer(String containerName) {
+        validateArgument(containerName);
+        containers.remove(containerName);
     }
 
+    /**
+     * Get a number of containers in set.
+     *
+     * @return Amount of containers.
+     */
     public int getContainersNumber() {
         return containers.size();
     }
 
     /**
-     * Get a list of all currently stored containers instances.
+     * Get a list of all currently stored containers instances as a iterator.
      *
      * @return Iterator to list of containers.
      */
     public Iterator<Container> getContainers() {
-        return containers.iterator();
-    }
-
-    /**
-     * Get instance of container under given Id number.
-     *
-     * @param id Identification number of container you want to get. (Index number)
-     * @return Instance of container.
-     */
-    public Container getContainerById(int id) {
-        return containers.get(id);
+        Collection<Container> values = containers.values();
+        return values.iterator();
     }
 
 
-    private void validateArgument(Container container) {
-        if (container == null) {
+    public Container getContainer(String containerName) {
+        return containers.get(containerName);
+    }
+
+
+    private void validateArgument(Object argument) {
+        if (argument == null) {
             throw new IllegalArgumentException("Argument is null");
         }
     }
-
-
 }

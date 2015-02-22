@@ -1,36 +1,45 @@
 package express.api.model.ingredient;
 
+import express.api.controller.containers.Container;
+import express.api.controller.containers.Containers;
+
 import java.util.*;
 
 public class Ingredients {
 
     private static Ingredients instance = new Ingredients();
+    private Containers containersSet = Containers.getInstance();
+
+    public static final int GRANULAR = 0;
+    public static final int LIQUID = 1;
+
 
     public static Ingredients getInstance() {
         return instance;
     }
 
-    private List<Ingredient> ingredients = new ArrayList<Ingredient>();
-
     /**
-     * Add ingredient to current set of ingredients. Ingredient must be unique.
+     * Get instance representing ingredient stored in container by name of container that contains ingredient.
      *
-     * @param ingredient
-     */
-    public void addIngredient(Ingredient ingredient) {
-        validationIngredientOnList(ingredient);
-        ingredients.add(ingredient);
-    }
-
-    /**
-     * Get ingredient by its Id.
-     *
-     * @param id Index/Identification of ingredient.
+     * @param containerName Name of container ingredient.
      * @return Ingredient under given id.
      */
-    public Ingredient getIngredient(int id) {
-        return this.ingredients.get(id);
+    public Ingredient getIngredient(String containerName) {
+        Container container = containersSet.getContainer(containerName);
+        return container.getIngredient();
     }
+
+
+    /**
+     * Get ingredient from given container instance.
+     *
+     * @param container Instance of container.
+     * @return ingredient instance.
+     */
+    public Ingredient getIngredient(Container container) {
+        return container.getIngredient();
+    }
+
 
     /**
      * Get list of all currently stored ingredients
@@ -38,12 +47,17 @@ public class Ingredients {
      * @return Iterator of ingredients.
      */
     public Iterator<Ingredient> getIngredients() {
-        return ingredients.iterator();
+        Iterator<Container> containersIterator;
+        Collection<Ingredient> ingredientsCollection = new ArrayList<Ingredient>();
+
+        containersIterator = containersSet.getContainers();
+
+        while (containersIterator.hasNext()) {
+            Container container = containersIterator.next();
+            ingredientsCollection.add(container.getIngredient());
+        }
+
+        return ingredientsCollection.iterator();
     }
 
-    private void validationIngredientOnList(Ingredient ingredient) {
-        if (ingredients.contains(ingredient)) {
-            throw new IllegalArgumentException("There's already this ingredient on list.");
-        }
-    }
 }

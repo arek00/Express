@@ -1,26 +1,27 @@
 package express.api.controller.machine;
 
 import express.api.controller.brew.BrewSequence;
+import express.api.controller.containers.Container;
 import express.api.controller.device.Device;
+import express.api.controller.device.Devices;
 import express.api.controller.device.DevicesController;
 import express.api.exceptions.DeviceException;
 import express.api.model.ingredient.Ingredient;
 import express.api.model.ingredient.Ingredients;
 import express.api.model.recipe.Recipe;
-import express.api.model.recipe.RecipeMaker;
 import express.api.model.recipe.Recipes;
 
 import java.util.Collection;
 import java.util.Iterator;
 
 /**
+ * Singleton.
  * Machine controller is a set of functions that let simplify usage of Express data's model API.
  * Machine controller is facade that contains methods to use basic functionality, mainly on Express' data structure
  * like sets of devices or recipes. It also let performs a brewing strategy.
  *
  * You should take an instance by calling getInstance() method as it is singleton class, there should be only single
  * representation of class in runtime.
- *
  */
 public class MachineController {
 
@@ -30,27 +31,26 @@ public class MachineController {
         return instance;
     }
 
-
-    private DevicesController devicesController;
+    private Devices devices;
     private Ingredients ingredients;
     private Recipes recipes;
 
     private MachineController() {
-        devicesController = DevicesController.getInstance();
+        devices = Devices.getInstance();
         ingredients = Ingredients.getInstance();
         recipes = Recipes.getInstance();
     }
 
-    public Ingredient getIngredient(int containerId) {
-        return ingredients.getIngredient(containerId);
+    public Ingredient getIngredient(String containerName) {
+        return ingredients.getIngredient(containerName);
     }
 
-    public Collection<Ingredient> getAllIngredients() {
-        return ingredients.getAllIngredients();
+    public Ingredient getIngredient(Container container) {
+        return ingredients.getIngredient(container);
     }
 
-    public void addIngredient(Ingredient ingredient) {
-        ingredients.addIngredient(ingredient);
+    public Iterator<Ingredient> getIngredients() {
+        return ingredients.getIngredients();
     }
 
     public Recipe getRecipe(int recipeNumber) {
@@ -70,15 +70,15 @@ public class MachineController {
     }
 
     public void addDevice(Device device) {
-        devicesController.addDevice(device);
+        devices.addDevice(device);
     }
 
-    public Device getDevice(int deviceId) {
-        return devicesController.getDeviceById(deviceId);
+    public Device getDevice(String deviceName) {
+        return devices.getDeviceByName(deviceName);
     }
 
-    public Collection<Device> getAllDevices() {
-        return devicesController.getAllDevices();
+    public Iterator<Device> getAllDevices() {
+        return devices.getDevices();
     }
 
 }
