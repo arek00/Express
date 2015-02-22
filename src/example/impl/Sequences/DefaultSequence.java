@@ -2,13 +2,13 @@ package example.impl.Sequences;
 
 import example.impl.Devices.Grinder;
 import example.impl.DevicesIds;
-import express.api.controller.brew.BrewSequence;
-import express.api.controller.device.Device;
-import express.api.controller.machine.MachineController;
+import express.api.model.devices.sequences.BrewSequence;
+import express.api.model.devices.Device;
+import express.api.model.MachineController;
 import express.api.exceptions.DeviceException;
-import express.api.model.ingredient.Granular;
-import express.api.model.ingredient.Ingredient;
-import express.api.model.recipe.Recipe;
+import express.api.model.ingredients.Granular;
+import express.api.model.ingredients.Ingredient;
+import express.api.model.recipes.Recipe;
 
 import java.util.Collection;
 

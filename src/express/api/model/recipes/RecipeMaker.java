@@ -1,7 +1,7 @@
-package express.api.model.recipe;
+package express.api.model.recipes;
 
-import express.api.converter.IteratorConverter;
-import express.api.model.ingredient.Ingredient;
+import express.api.utils.converters.IteratorConverter;
+import express.api.model.ingredients.Ingredient;
 
 import java.util.ArrayList;
 import java.util.Collection;

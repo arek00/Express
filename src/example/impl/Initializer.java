@@ -3,12 +3,12 @@ package example.impl;
 import example.impl.Devices.Container;
 import example.impl.Devices.Dispenser;
 import example.impl.Devices.Grinder;
-import express.api.controller.device.Device;
-import express.api.controller.machine.MachineController;
-import express.api.model.ingredient.Granular;
-import express.api.model.ingredient.Ingredient;
-import express.api.model.ingredient.Liquid;
-import express.api.model.recipe.RecipeMaker;
+import express.api.model.devices.Device;
+import express.api.model.MachineController;
+import express.api.model.ingredients.Granular;
+import express.api.model.ingredients.Ingredient;
+import express.api.model.ingredients.Liquid;
+import express.api.model.recipes.RecipeMaker;
 
 /**
  * Created by Admin on 2015-01-13.

@@ -1,6 +1,4 @@
-package express.api.controller.containers;
-
-import express.api.model.ingredient.Ingredient;
+package express.api.model.devices.containers;
 
 import java.util.*;
 

@@ -1,7 +1,7 @@
 package example.impl;
 
 import example.impl.Sequences.DefaultSequence;
-import express.api.controller.machine.MachineController;
+import express.api.model.MachineController;
 import express.api.exceptions.DeviceException;
 
 /**

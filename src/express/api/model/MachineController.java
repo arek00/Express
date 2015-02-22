@@ -1,17 +1,15 @@
-package express.api.controller.machine;
+package express.api.model;
 
-import express.api.controller.brew.BrewSequence;
-import express.api.controller.containers.Container;
-import express.api.controller.device.Device;
-import express.api.controller.device.Devices;
-import express.api.controller.device.DevicesController;
+import express.api.model.devices.sequences.BrewSequence;
+import express.api.model.devices.containers.Container;
+import express.api.model.devices.Device;
+import express.api.model.devices.Devices;
 import express.api.exceptions.DeviceException;
-import express.api.model.ingredient.Ingredient;
-import express.api.model.ingredient.Ingredients;
-import express.api.model.recipe.Recipe;
-import express.api.model.recipe.Recipes;
+import express.api.model.ingredients.Ingredient;
+import express.api.model.ingredients.Ingredients;
+import express.api.model.recipes.Recipe;
+import express.api.model.recipes.Recipes;
 
-import java.util.Collection;
 import java.util.Iterator;
 
 /**
@@ -19,7 +17,7 @@ import java.util.Iterator;
  * Machine controller is a set of functions that let simplify usage of Express data's model API.
  * Machine controller is facade that contains methods to use basic functionality, mainly on Express' data structure
  * like sets of devices or recipes. It also let performs a brewing strategy.
- *
+ * <p/>
  * You should take an instance by calling getInstance() method as it is singleton class, there should be only single
  * representation of class in runtime.
  */

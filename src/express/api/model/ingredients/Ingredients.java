@@ -1,7 +1,7 @@
-package express.api.model.ingredient;
+package express.api.model.ingredients;
 
-import express.api.controller.containers.Container;
-import express.api.controller.containers.Containers;
+import express.api.model.devices.containers.Container;
+import express.api.model.devices.containers.Containers;
 
 import java.util.*;
 
@@ -14,6 +14,11 @@ public class Ingredients {
     public static final int LIQUID = 1;
 
 
+    /**
+     * Get an instance of Ingredients set, singleton.
+     *
+     * @return instance of Ingredients.
+     */
     public static Ingredients getInstance() {
         return instance;
     }

@@ -1,6 +1,6 @@
-package express.api.model.ingredient;
+package express.api.model.ingredients;
 
-import express.api.controller.containers.Container;
+import express.api.model.devices.containers.Container;
 
 /**
  * Created by Admin on 2014-12-14.

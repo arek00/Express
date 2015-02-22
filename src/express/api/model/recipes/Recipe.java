@@ -1,9 +1,8 @@
-package express.api.model.recipe;
+package express.api.model.recipes;
 
-import express.api.model.ingredient.Ingredient;
+import express.api.model.ingredients.Ingredient;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 

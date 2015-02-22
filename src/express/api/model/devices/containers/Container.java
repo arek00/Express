@@ -1,10 +1,10 @@
-package express.api.controller.containers;
+package express.api.model.devices.containers;
 
-import express.api.controller.device.Device;
-import express.api.model.ingredient.Granular;
-import express.api.model.ingredient.Ingredient;
-import express.api.model.ingredient.Ingredients;
-import express.api.model.ingredient.Liquid;
+import express.api.model.devices.Device;
+import express.api.model.ingredients.Granular;
+import express.api.model.ingredients.Ingredient;
+import express.api.model.ingredients.Ingredients;
+import express.api.model.ingredients.Liquid;
 
 /**
  * Created by Admin on 2015-02-19.

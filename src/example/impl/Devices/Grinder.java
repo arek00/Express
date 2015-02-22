@@ -1,8 +1,8 @@
 package example.impl.Devices;
 
-import express.api.controller.device.Device;
+import express.api.model.devices.Device;
 import express.api.exceptions.DeviceException;
-import express.api.model.ingredient.Ingredient;
+import express.api.model.ingredients.Ingredient;
 
 /**
  * Created by Admin on 2015-01-13.

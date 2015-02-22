@@ -1,4 +1,4 @@
-package express.api.converter;
+package express.api.utils.converters;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,6 +9,8 @@ import java.util.Iterator;
  */
 public class IteratorConverter {
 
+    private IteratorConverter() {
+    }
 
     /**
      * Converts given iterator to collection of same type.

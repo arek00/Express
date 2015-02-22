@@ -1,4 +1,4 @@
-package express.api.controller.device;
+package express.api.model.devices;
 
 import express.api.exceptions.DeviceException;
 

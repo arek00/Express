@@ -1,7 +1,6 @@
-package express.api.model.recipe;
+package express.api.model.recipes;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 

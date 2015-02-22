@@ -1,4 +1,4 @@
-package express.api.controller.brew;
+package express.api.model.devices.sequences;
 
 import express.api.exceptions.DeviceException;
 
