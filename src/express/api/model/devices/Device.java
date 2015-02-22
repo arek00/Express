@@ -3,10 +3,21 @@ package express.api.model.devices;
 import express.api.exceptions.DeviceException;
 
 /**
- * Created by Admin on 2014-12-14.
+ * Interface that describes any of device in express.
  */
 
-public interface Device{
+public interface Device {
+    /**
+     * Perform operation assigned to component of express - device.
+     *
+     * @throws DeviceException
+     */
     public void perform() throws DeviceException;
+
+    /**
+     * Get name of this device
+     *
+     * @return device's name.
+     */
     public String getName();
 }

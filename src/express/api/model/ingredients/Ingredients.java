@@ -5,6 +5,11 @@ import express.api.model.devices.containers.Containers;
 
 import java.util.*;
 
+/**
+ * Class that manages but doesn't store instances of ingredients.
+ * It is able to return list of ingredients.
+ *
+ */
 public class Ingredients {
 
     private static Ingredients instance = new Ingredients();
@@ -22,19 +27,7 @@ public class Ingredients {
     public static Ingredients getInstance() {
         return instance;
     }
-
-    /**
-     * Get instance representing ingredient stored in container by name of container that contains ingredient.
-     *
-     * @param containerName Name of container ingredient.
-     * @return Ingredient under given id.
-     */
-    public Ingredient getIngredient(String containerName) {
-        Container container = containersSet.getContainer(containerName);
-        return container.getIngredient();
-    }
-
-
+    
     /**
      * Get ingredient from given container instance.
      *

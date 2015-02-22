@@ -3,12 +3,18 @@ package express.api.model.ingredients;
 import express.api.model.devices.containers.Container;
 
 /**
- * Created by Admin on 2014-12-14.
+ * Class is representing granular ingredient.
+ * Besides amount it keeps also information about ground consistence of ingredient,
+ * if granular ingredient must be grind in grinder.
  */
 public class Granular extends Ingredient {
 
     private boolean grounded;
 
+    /**
+     * @param name      Name of ingredient.
+     * @param container Instance of container which stores this ingredient.
+     */
     public Granular(String name, Container container) {
         super(name, container);
         this.grounded = false;
@@ -24,7 +30,8 @@ public class Granular extends Ingredient {
     }
 
     /**
-     * Set parameter if granular ingredient is/isn't grounded.
+     * Set parameter if granular ingredient is grounded.
+     * Negative means that ingredient will be grind by grinder.
      */
     public void setGrounded(boolean isGrounded) {
         this.grounded = isGrounded;

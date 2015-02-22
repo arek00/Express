@@ -1,5 +1,6 @@
 package express.api.model;
 
+import express.api.model.devices.containers.Containers;
 import express.api.model.devices.sequences.BrewSequence;
 import express.api.model.devices.containers.Container;
 import express.api.model.devices.Device;
@@ -15,7 +16,7 @@ import java.util.Iterator;
 /**
  * Singleton.
  * Machine controller is a set of functions that let simplify usage of Express data's model API.
- * Machine controller is facade that contains methods to use basic functionality, mainly on Express' data structure
+ * Machine controller is <b>facade</b> that contains methods to use basic functionality, mainly on Express' data structure
  * like sets of devices or recipes. It also let performs a brewing strategy.
  * <p/>
  * You should take an instance by calling getInstance() method as it is singleton class, there should be only single
@@ -32,11 +33,13 @@ public class MachineController {
     private Devices devices;
     private Ingredients ingredients;
     private Recipes recipes;
+    private Containers containers;
 
     private MachineController() {
         devices = Devices.getInstance();
         ingredients = Ingredients.getInstance();
         recipes = Recipes.getInstance();
+        containers = Containers.getInstance();
     }
 
     public Ingredient getIngredient(String containerName) {
@@ -74,6 +77,23 @@ public class MachineController {
     public Device getDevice(String deviceName) {
         return devices.getDeviceByName(deviceName);
     }
+
+    public void addContainer(Container container) {
+        containers.addContainer(container);
+    }
+
+    public Container getContainer(String containerName) {
+        return containers.getContainer(containerName);
+    }
+
+    public void removeContainer(String containerName) {
+        containers.removeContainer(containerName);
+    }
+
+    public void removeContainer(Container container) {
+        containers.removeContainer(container);
+    }
+
 
     public Iterator<Device> getAllDevices() {
         return devices.getDevices();

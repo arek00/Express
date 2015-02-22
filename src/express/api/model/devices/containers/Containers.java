@@ -1,14 +1,15 @@
 package express.api.model.devices.containers;
 
+import express.api.utils.validators.ArgumentsValidator;
+
 import java.util.*;
 
 /**
- * Created by Admin on 2015-02-19.
+ * Set that stores and manages a set of containers.
  */
 public class Containers {
 
     private static Containers instance = new Containers();
-
 
     /**
      * Singleton.
@@ -30,7 +31,8 @@ public class Containers {
      * @param container Container
      */
     public void addContainer(Container container) {
-        validateArgument(container);
+        ArgumentsValidator.nullArgument(container);
+
         containers.put(container.getName(), container);
     }
 
@@ -40,7 +42,8 @@ public class Containers {
      * @param container Instance of container to remove from set.
      */
     public void removeContainer(Container container) {
-        validateArgument(container);
+        ArgumentsValidator.nullArgument(container);
+
         removeContainer(container.getName());
     }
 
@@ -50,7 +53,9 @@ public class Containers {
      * @param containerName Name of container to remove.
      */
     public void removeContainer(String containerName) {
-        validateArgument(containerName);
+        ArgumentsValidator.nullArgument(containerName);
+        ArgumentsValidator.emptyString(containerName);
+
         containers.remove(containerName);
     }
 
@@ -75,13 +80,9 @@ public class Containers {
 
 
     public Container getContainer(String containerName) {
+        ArgumentsValidator.nullArgument(containerName);
+        ArgumentsValidator.emptyString(containerName);
+
         return containers.get(containerName);
-    }
-
-
-    private void validateArgument(Object argument) {
-        if (argument == null) {
-            throw new IllegalArgumentException("Argument is null");
-        }
     }
 }

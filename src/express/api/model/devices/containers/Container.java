@@ -5,9 +5,12 @@ import express.api.model.ingredients.Granular;
 import express.api.model.ingredients.Ingredient;
 import express.api.model.ingredients.Ingredients;
 import express.api.model.ingredients.Liquid;
+import express.api.utils.validators.ArgumentsValidator;
 
 /**
- * Created by Admin on 2015-02-19.
+ * Abstract implementation for devices that going to be using like containers.
+ * Every container-like device representation should extends this class and implements their functionality
+ * like taking ingredient from it.
  */
 public abstract class Container implements Device {
 
@@ -16,9 +19,14 @@ public abstract class Container implements Device {
     protected int ingredientType;
     protected String ingredientName;
 
-
+    /**
+     * @param name           Name that describe container.
+     * @param ingredientName Name of ingredient that is stored in container.
+     * @param ingredientType Liquid or granular kind of ingredient. Use Ingredients' class final variables to choose that.
+     */
     public Container(String name, String ingredientName, int ingredientType) {
         validateArguments(name, ingredientName, ingredientType);
+        
         this.name = name;
         this.ingredientType = ingredientType;
         this.ingredientName = ingredientName;
@@ -40,12 +48,17 @@ public abstract class Container implements Device {
     }
 
     private void validateArguments(String name, String ingredientName, int ingredientType) {
-        if (name == null) {
-            throw new IllegalArgumentException("Container name can't be null");
-        } else if (ingredientType != Ingredients.GRANULAR && ingredientType != Ingredients.LIQUID) {
-            throw new IllegalArgumentException("Invalid ingredient type");
-        } else if (ingredientName == null) {
-            throw new IllegalArgumentException("Ingredient name can't be null");
+        ArgumentsValidator.nullArgument(name);
+        ArgumentsValidator.nullArgument(ingredientName);
+        ArgumentsValidator.nullArgument(ingredientType);
+        ArgumentsValidator.emptyString(name);
+        ArgumentsValidator.emptyString(ingredientName);
+        validateIngredientType(ingredientType);
+    }
+
+    private void validateIngredientType(int ingredientType) {
+        if (!(ingredientType == Ingredients.GRANULAR || ingredientType == Ingredients.LIQUID)) {
+            throw new IllegalArgumentException("Wrong given ingredient type.");
         }
     }
 }

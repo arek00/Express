@@ -36,4 +36,8 @@ public class Recipe {
         return additives.size();
     }
 
+    public String getRecipeName() {
+        return recipeName;
+    }
+
 }

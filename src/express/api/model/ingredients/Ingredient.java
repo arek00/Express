@@ -3,7 +3,7 @@ package express.api.model.ingredients;
 import express.api.model.devices.containers.Container;
 
 /**
- * Created by Admin on 2014-12-14.
+ * Base class of ingredients.
  */
 public class Ingredient {
 
@@ -11,6 +11,11 @@ public class Ingredient {
     protected Container container;
     protected int amount;
 
+    /**
+     *
+     * @param name Name of ingredient.
+     * @param container Instance of container that stores that ingredient.
+     */
     public Ingredient(String name, Container container) {
         this.name = name;
         this.amount = 0;

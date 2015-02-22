@@ -10,8 +10,7 @@ public class Liquid extends Ingredient {
     private int temperature;
     private int pressure;
 
-    public Liquid(String name, Container container)
-    {
+    public Liquid(String name, Container container) {
         super(name, container);
 
         this.temperature = 0;
@@ -27,6 +26,7 @@ public class Liquid extends Ingredient {
 
     /**
      * Set temperature of liquid ingredient has to be warm.
+     *
      * @param temperature
      */
     public void setTemperature(int temperature) {
@@ -44,6 +44,7 @@ public class Liquid extends Ingredient {
 
     /**
      * Set pressure that ingredient must be pump with.
+     *
      * @param pressure
      */
     public void setPressure(int pressure) {
