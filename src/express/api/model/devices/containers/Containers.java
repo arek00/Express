@@ -32,7 +32,6 @@ public class Containers {
      */
     public void addContainer(Container container) {
         ArgumentsValidator.nullArgument(container);
-
         containers.put(container.getName(), container);
     }
 

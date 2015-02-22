@@ -2,6 +2,7 @@ package express.api.model.recipes;
 
 import express.api.utils.converters.IteratorConverter;
 import express.api.model.ingredients.Ingredient;
+import express.api.utils.validators.ArgumentsValidator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,7 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by Admin on 2014-12-14.
+ * Generate Recipe from current chosen ingredients.
  */
 public class RecipeMaker {
 
@@ -22,44 +23,97 @@ public class RecipeMaker {
     private RecipeMaker() {
     }
 
+    /**
+     * @return instance of RecipeMaker
+     */
     public static RecipeMaker getInstance() {
         return RecipeMaker.instance;
     }
 
+    /**
+     * Add main ingredient to set in order to create recipe.
+     *
+     * @param ingredient instance of ingredient.
+     */
     public void addIngredient(Ingredient ingredient) {
         ingredients.add(ingredient);
     }
 
+    /**
+     * Add additive to recipe
+     *
+     * @param additive Ingredient that will be additive to drink.
+     */
     public void addAdditive(Ingredient additive) {
         additives.add(additive);
     }
 
-    public void removeIngredient(int ingredientNumber) {
-        ingredients.remove(ingredientNumber);
+    /**
+     * Remove ingredient from current set of main ingredients.
+     *
+     * @param ingredientIndex index of ingredient in current set.
+     */
+    public void removeIngredient(int ingredientIndex) {
+        ingredients.remove(ingredientIndex);
     }
 
-    public void removeAdditive(int additiveNumber) {
-        additives.remove(additiveNumber);
+    /**
+     * Remove ingredient from current set of main ingredients.
+     *
+     * @param additiveIndex index of ingredient in current set.
+     */
+    public void removeAdditive(int additiveIndex) {
+        additives.remove(additiveIndex);
     }
 
+    /**
+     * Clear current set of ingredients and additives.
+     */
     public void clearRecipe() {
         ingredients.clear();
         additives.clear();
     }
 
+    /**
+     * Create instance of Recipe that contains current chosen ingredients and additives.
+     *
+     * @return Instance of Recipe
+     */
     public Recipe createRecipe() {
+        ArgumentsValidator.nullArgument(ingredients);
+        ArgumentsValidator.nullArgument(additives);
+        ArgumentsValidator.emptyCollection(ingredients);
+
         return new Recipe(ingredients, additives);
     }
 
+    /**
+     * Get all current chosen ingredients.
+     *
+     * @return Iterator to ingredients
+     */
     public Iterator<Ingredient> getAllIngredients() {
         return ingredients.iterator();
     }
 
+
+    /**
+     * Get all current chosen additives.
+     *
+     * @return Iterator to additives.
+     */
     public Iterator<Ingredient> getAllAdditives() {
         return additives.iterator();
     }
 
+    /**
+     * Set current ingredients and additives from existing recipe in order to create or modify recipe.
+     *
+     * @param recipe Recipe to set in maker.
+     */
     public void setIngredientsFromRecipe(Recipe recipe) {
+        ArgumentsValidator.nullArgument(recipe);
+
         Collection<Ingredient> copyCollection;
         clearRecipe();
 
@@ -70,10 +124,18 @@ public class RecipeMaker {
         additives.addAll(copyCollection);
     }
 
+    /**
+     * @param additiveIndex Index of additive in current set.
+     * @return Additive under given index.
+     */
     public Ingredient getAdditive(int additiveIndex) {
         return additives.get(additiveIndex);
     }
 
+    /**
+     * @param ingredientIndex Index of additive in current set.
+     * @return Ingredient under given index.
+     */
     public Ingredient getIngredient(int ingredientIndex) {
         return ingredients.get(ingredientIndex);
     }

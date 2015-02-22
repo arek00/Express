@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by Admin on 2014-12-14.
+ * Set of Recipes stored in express' memory.
  */
 public class Recipes {
 
