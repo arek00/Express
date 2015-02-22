@@ -42,10 +42,6 @@ public class MachineController {
         containers = Containers.getInstance();
     }
 
-    public Ingredient getIngredient(String containerName) {
-        return ingredients.getIngredient(containerName);
-    }
-
     public Ingredient getIngredient(Container container) {
         return ingredients.getIngredient(container);
     }
@@ -75,7 +71,7 @@ public class MachineController {
     }
 
     public Device getDevice(String deviceName) {
-        return devices.getDeviceByName(deviceName);
+        return devices.getDevice(deviceName);
     }
 
     public void addContainer(Container container) {

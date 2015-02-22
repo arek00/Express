@@ -8,7 +8,6 @@ import java.util.*;
 /**
  * Class that manages but doesn't store instances of ingredients.
  * It is able to return list of ingredients.
- *
  */
 public class Ingredients {
 
@@ -27,7 +26,7 @@ public class Ingredients {
     public static Ingredients getInstance() {
         return instance;
     }
-    
+
     /**
      * Get ingredient from given container instance.
      *

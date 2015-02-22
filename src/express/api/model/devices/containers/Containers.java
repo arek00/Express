@@ -78,7 +78,10 @@ public class Containers {
         return values.iterator();
     }
 
-
+    /**
+     * @param containerName Name of container.
+     * @return Instance of container with that name
+     */
     public Container getContainer(String containerName) {
         ArgumentsValidator.nullArgument(containerName);
         ArgumentsValidator.emptyString(containerName);

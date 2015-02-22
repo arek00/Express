@@ -6,6 +6,7 @@ import express.api.model.ingredients.Ingredient;
 import express.api.model.ingredients.Ingredients;
 import express.api.model.ingredients.Liquid;
 import express.api.utils.validators.ArgumentsValidator;
+import express.api.utils.validators.NumbersValidator;
 
 /**
  * Abstract implementation for devices that going to be using like containers.
@@ -14,10 +15,27 @@ import express.api.utils.validators.ArgumentsValidator;
  */
 public abstract class Container implements Device {
 
-
     protected String name;
-    protected int ingredientType;
     protected String ingredientName;
+    protected double containerState;
+    protected int ingredientType;
+
+    /**
+     * @param ingredientName Name of ingredient that is stored in container. Name of container become the same as ingredient
+     * @param ingredientType Liquid or granular kind of ingredient. Use Ingredients' class final variables to choose that.
+     */
+    public Container(String ingredientName, int ingredientType) {
+        this(ingredientName, ingredientName, ingredientType, 0);
+    }
+
+    /**
+     * @param ingredientName Name of ingredient that is stored in container. Name of container become the same as ingredient
+     * @param ingredientType Liquid or granular kind of ingredient. Use Ingredients' class final variables to choose that.
+     * @param containerState Amount of ingredient in container in milliliters or grams.
+     */
+    public Container(String ingredientName, int ingredientType, double containerState) {
+        this(ingredientName, ingredientName, ingredientType, containerState);
+    }
 
     /**
      * @param name           Name that describe container.
@@ -25,11 +43,22 @@ public abstract class Container implements Device {
      * @param ingredientType Liquid or granular kind of ingredient. Use Ingredients' class final variables to choose that.
      */
     public Container(String name, String ingredientName, int ingredientType) {
-        validateArguments(name, ingredientName, ingredientType);
-        
+        this(name, ingredientName, ingredientType, 0);
+    }
+
+    /**
+     * @param name           Name that describe container.
+     * @param ingredientName Name of ingredient that is stored in container.
+     * @param ingredientType Liquid or granular kind of ingredient. Use Ingredients' class final variables to choose that.
+     * @param containerState Amount of ingredient in container in milliliters or grams.
+     */
+    public Container(String name, String ingredientName, int ingredientType, double containerState) {
+        validateArguments(name, ingredientName, ingredientType, containerState);
+
         this.name = name;
         this.ingredientType = ingredientType;
         this.ingredientName = ingredientName;
+        this.containerState = containerState;
     }
 
     /**
@@ -47,12 +76,28 @@ public abstract class Container implements Device {
         }
     }
 
-    private void validateArguments(String name, String ingredientName, int ingredientType) {
+    /**
+     * @return Amount of ingredient in this container in milliliters or grams.
+     */
+    public double getContainerState() {
+        return containerState;
+    }
+
+    /**
+     * @param containerState Set amount of ingredient in container in milliliters or grams.
+     */
+    public void setContainerState(double containerState) {
+        NumbersValidator.negativeNumber(containerState);
+        this.containerState = containerState;
+    }
+
+    private void validateArguments(String name, String ingredientName, int ingredientType, double containerState) {
         ArgumentsValidator.nullArgument(name);
         ArgumentsValidator.nullArgument(ingredientName);
         ArgumentsValidator.nullArgument(ingredientType);
         ArgumentsValidator.emptyString(name);
         ArgumentsValidator.emptyString(ingredientName);
+        NumbersValidator.negativeNumber(containerState);
         validateIngredientType(ingredientType);
     }
 

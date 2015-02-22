@@ -1,15 +1,22 @@
 package express.api.model.ingredients;
 
 import express.api.model.devices.containers.Container;
+import express.api.utils.validators.NumbersValidator;
 
 /**
- * Created by Admin on 2014-12-14.
+ * Representation of liquid ingredient that may be using to brew coffee.
+ * Besides information about amount it also has information about temperature and pressure that ingredient
+ * should be warm and pumped.
  */
 public class Liquid extends Ingredient {
 
-    private int temperature;
-    private int pressure;
+    private double temperature;
+    private double pressure;
 
+    /**
+     * @param name      Name of liquid ingredient
+     * @param container Instance of container that stores this ingredient.
+     */
     public Liquid(String name, Container container) {
         super(name, container);
 
@@ -20,36 +27,34 @@ public class Liquid extends Ingredient {
     /**
      * @return Temperature that liquid ingredient has to be warm.
      */
-    public int getTemperature() {
+    public double getTemperature() {
         return temperature;
     }
 
     /**
      * Set temperature of liquid ingredient has to be warm.
      *
-     * @param temperature
+     * @param temperature Temperature in Celsius degree
      */
     public void setTemperature(int temperature) {
-
-        validateArgument(temperature);
+        NumbersValidator.negativeNumber(temperature);
         this.temperature = temperature;
     }
 
     /**
      * @return Pressure that ingredient must be pump with.
      */
-    public int getPressure() {
+    public double getPressure() {
         return pressure;
     }
 
     /**
      * Set pressure that ingredient must be pump with.
      *
-     * @param pressure
+     * @param pressure Pressure in Bars degree
      */
-    public void setPressure(int pressure) {
-
-        validateArgument(pressure);
+    public void setPressure(double pressure) {
+        NumbersValidator.negativeNumber(pressure);
         this.pressure = pressure;
     }
 }
