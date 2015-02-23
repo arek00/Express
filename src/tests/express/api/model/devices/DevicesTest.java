@@ -60,8 +60,6 @@ public class DevicesTest {
             deviceIterator.next();
             iteratorCount++;
         }
-
-        System.out.println(Integer.toString(iteratorCount));
         assertTrue(iteratorCount == 3);
     }
 

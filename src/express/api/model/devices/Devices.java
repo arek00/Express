@@ -84,6 +84,10 @@ public class Devices {
         return (devices.get(deviceName) != null);
     }
 
+    /**
+     * Remove device from express by its name.
+     * @param deviceName name of device to remove.
+     */
     public void removeDevice(String deviceName) {
         ArgumentsValidator.nullArgument(deviceName);
         ArgumentsValidator.emptyString(deviceName);

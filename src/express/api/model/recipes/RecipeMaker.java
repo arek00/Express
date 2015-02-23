@@ -75,6 +75,25 @@ public class RecipeMaker {
     }
 
     /**
+     * Get amount of ingredients in current recipe in making
+     *
+     * @return Number of ingredients
+     */
+    public int getIngredientsNumber() {
+        return ingredients.size();
+    }
+
+
+    /**
+     * Get amount of additives in current recipe in making
+     *
+     * @return Number of additives
+     */
+    public int getAdditivesNumber() {
+        return additives.size();
+    }
+
+    /**
      * Create instance of Recipe that contains current chosen ingredients and additives.
      *
      * @return Instance of Recipe
