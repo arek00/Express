@@ -43,16 +43,6 @@ public class MachineController {
     }
 
     /**
-     * Get ingredient from given container.
-     *
-     * @param container Container to get ingredient from.
-     * @return ingredient from given container
-     */
-    public Ingredient getIngredient(Container container) {
-        return ingredients.getIngredient(container);
-    }
-
-    /**
      * Get iterator to all ingredients currently stored in containers.
      *
      * @return Iterator to ingredients.

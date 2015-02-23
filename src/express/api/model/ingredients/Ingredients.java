@@ -28,17 +28,6 @@ public class Ingredients {
     }
 
     /**
-     * Get ingredient from given container instance.
-     *
-     * @param container Instance of container.
-     * @return ingredient instance.
-     */
-    public Ingredient getIngredient(Container container) {
-        return container.getIngredient();
-    }
-
-
-    /**
      * Get list of all currently stored ingredients
      *
      * @return Iterator of ingredients.

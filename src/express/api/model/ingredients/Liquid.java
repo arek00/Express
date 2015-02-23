@@ -36,7 +36,7 @@ public class Liquid extends Ingredient {
      *
      * @param temperature Temperature in Celsius degree
      */
-    public void setTemperature(int temperature) {
+    public void setTemperature(double temperature) {
         NumbersValidator.negativeNumber(temperature);
         this.temperature = temperature;
     }

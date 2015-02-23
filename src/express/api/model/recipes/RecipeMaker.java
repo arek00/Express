@@ -72,6 +72,7 @@ public class RecipeMaker {
     public void clearRecipe() {
         ingredients.clear();
         additives.clear();
+
     }
 
     /**

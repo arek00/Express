@@ -136,13 +136,18 @@ public class RecipeMakerTest {
 
     }
 
-    @Test
-    public void testGetAdditive() {
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testGetAdditiveIngredient() {
 
-    }
+        assertTrue(maker.getAdditivesNumber() == 2);
+        assertTrue(maker.getIngredientsNumber() == 2);
 
-    @Test
-    public void testGetIngredient() {
+        assertTrue(maker.getAdditive(0) == additive1);
+        assertTrue(maker.getAdditive(1) == additive2);
+
+        assertTrue(maker.getIngredient(0) == ingredient1);
+
+        maker.getIngredient(10);
 
     }
 }
