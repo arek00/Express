@@ -2,6 +2,8 @@ package express.api.utils.validators;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
 /**
  * Created by Admin on 2015-02-22.
@@ -14,6 +16,12 @@ public class ArgumentsValidator {
     public static void nullArgument(Object argument) {
         if (argument == null) {
             throw new IllegalArgumentException("Given argument is null");
+        }
+    }
+
+    public static void nullReturn(Object returnValue) {
+        if (returnValue == null) {
+            throw new NoSuchElementException("Could not find such element");
         }
     }
 

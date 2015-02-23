@@ -32,6 +32,8 @@ public class Containers {
      */
     public void addContainer(Container container) {
         ArgumentsValidator.nullArgument(container);
+        checkUnique(container);
+
         containers.put(container.getName(), container);
     }
 
@@ -85,6 +87,25 @@ public class Containers {
         ArgumentsValidator.nullArgument(containerName);
         ArgumentsValidator.emptyString(containerName);
 
-        return containers.get(containerName);
+        Container container = containers.get(containerName);
+        ArgumentsValidator.nullReturn(container);
+
+        return container;
+    }
+
+    /**
+     * Tells if set already has container with that name.
+     *
+     * @param containerName container name
+     * @return true when container with given name exists in set, false otherwise
+     */
+    public boolean containsContainer(String containerName) {
+        return (containers.get(containerName) != null);
+    }
+
+    private void checkUnique(Container container) {
+        if (containers.get(container.getName()) != null) {
+            throw new IllegalArgumentException("There already exists container with name " + container.getName());
+        }
     }
 }
