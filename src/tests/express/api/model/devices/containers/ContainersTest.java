@@ -23,9 +23,9 @@ public class ContainersTest {
     public static void init() {
         containers = Containers.getInstance();
 
-        container1 = new ContainerMock("Mleko", Ingredients.LIQUID, 1568);
-        container2 = new ContainerMock("Kawa", Ingredients.GRANULAR, 552);
-        container3 = new ContainerMock("Woda", Ingredients.LIQUID, 10000);
+        container1 = new MockContainer("Mleko", Ingredients.LIQUID, 1568);
+        container2 = new MockContainer("Kawa", Ingredients.GRANULAR, 552);
+        container3 = new MockContainer("Woda", Ingredients.LIQUID, 10000);
     }
 
 
@@ -43,12 +43,12 @@ public class ContainersTest {
     }
 
     @Test
-    public void testGetInstance() throws Exception {
+    public void testGetInstance() {
         assertTrue(containers == Containers.getInstance());
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddContainer() throws Exception {
+    public void testAddContainer() {
         int containersNumber = containers.getContainersNumber();
         assertTrue(containersNumber == 3);
 
@@ -57,7 +57,7 @@ public class ContainersTest {
     }
 
     @Test
-    public void testRemoveContainer() throws Exception {
+    public void testRemoveContainer() {
 
         assertTrue(containers.getContainersNumber() == 3);
 
@@ -71,12 +71,12 @@ public class ContainersTest {
     }
 
     @Test
-    public void testGetContainersNumber() throws Exception {
+    public void testGetContainersNumber() {
         assertTrue(containers.getContainersNumber() == 3);
     }
 
     @Test
-    public void testGetContainers() throws Exception {
+    public void testGetContainers() {
         int iteratorSize = 0;
         Iterator<Container> containerIterator = containers.getContainers();
 
@@ -88,8 +88,8 @@ public class ContainersTest {
         assertTrue(iteratorSize == 3);
     }
 
-    @Test (expected = NoSuchElementException.class)
-    public void testGetContainer() throws Exception {
+    @Test(expected = NoSuchElementException.class)
+    public void testGetContainer() {
         assertTrue(containers.getContainer("Mleko") != null);
 
         containers.getContainer("Herbata");

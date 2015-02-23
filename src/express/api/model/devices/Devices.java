@@ -36,7 +36,10 @@ public class Devices {
         ArgumentsValidator.nullArgument(deviceName);
         ArgumentsValidator.emptyString(deviceName);
 
-        return devices.get(deviceName);
+        Device device = devices.get(deviceName);
+        ArgumentsValidator.nullReturn(device);
+
+        return device;
     }
 
     /**
@@ -60,6 +63,32 @@ public class Devices {
         checkUniqueName(device.getName());
 
         devices.put(device.getName(), device);
+    }
+
+    /**
+     * Get amount of registered devices
+     *
+     * @return Number of currently stored devices instances.
+     */
+    public int getDevicesNumber() {
+        return devices.size();
+    }
+
+    /**
+     * Check if set contains device with given name.
+     *
+     * @param deviceName name of device.
+     * @return true if contains device with given name, false otherwise.
+     */
+    public boolean containsDevice(String deviceName) {
+        return (devices.get(deviceName) != null);
+    }
+
+    public void removeDevice(String deviceName) {
+        ArgumentsValidator.nullArgument(deviceName);
+        ArgumentsValidator.emptyString(deviceName);
+
+        devices.remove(deviceName);
     }
 
 

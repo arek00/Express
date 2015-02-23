@@ -18,8 +18,8 @@ public class ContainerTest {
 
     @BeforeClass
     public static void init() {
-        container1 = new ContainerMock("Mleko", Ingredients.LIQUID, 2000);
-        container2 = new ContainerMock("Kawa", Ingredients.GRANULAR, 1500);
+        container1 = new MockContainer("Mleko", Ingredients.LIQUID, 2000);
+        container2 = new MockContainer("Kawa", Ingredients.GRANULAR, 1500);
     }
 
 
@@ -65,8 +65,8 @@ public class ContainerTest {
         ingredient2 = container2.getIngredient();
         ingredient2.setAmount(350);
 
-        ((ContainerMock)container1).setIngredient(ingredient1);
-        ((ContainerMock)container2).setIngredient(ingredient2);
+        ((MockContainer)container1).setIngredient(ingredient1);
+        ((MockContainer)container2).setIngredient(ingredient2);
 
         amount1 = container1.getContainerState();
         amount2 = container2.getContainerState();

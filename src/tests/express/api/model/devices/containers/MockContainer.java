@@ -10,10 +10,10 @@ import express.api.utils.validators.ArgumentsValidator;
  */
 
 
-public class ContainerMock extends Container {
+public class MockContainer extends Container {
     private Ingredient ingredient;
 
-    public ContainerMock(String ingredientName, int ingredientType, double containerState) {
+    public MockContainer(String ingredientName, int ingredientType, double containerState) {
         super(ingredientName, ingredientType, containerState);
     }
 
