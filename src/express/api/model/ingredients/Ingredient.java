@@ -52,7 +52,7 @@ public class Ingredient {
      *
      * @param amount amount of ingredient in milliliters [m] or grams [g]
      */
-    public void setAmount(int amount) {
+    public void setAmount(double amount) {
         NumbersValidator.negativeNumber(amount);
         this.amount = amount;
     }

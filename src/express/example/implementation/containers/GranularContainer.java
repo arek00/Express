@@ -14,8 +14,8 @@ public class GranularContainer extends Container {
 
     private Ingredient ingredient;
 
-    public GranularContainer(String ingredientName) {
-        super(ingredientName, Ingredients.GRANULAR);
+    public GranularContainer(String ingredientName, double containerState) {
+        super(ingredientName, Ingredients.GRANULAR, containerState);
     }
 
     public void setIngredient(Ingredient ingredient) {

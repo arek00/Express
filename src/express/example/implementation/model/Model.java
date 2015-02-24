@@ -1,4 +1,4 @@
-package express.api.model;
+package express.example.implementation.model;
 
 import express.api.model.devices.containers.Containers;
 import express.api.model.devices.sequences.BrewSequence;
@@ -22,13 +22,13 @@ import java.util.Iterator;
  * You should take an instance by calling getInstance() method as it is singleton class, there should be only single
  * representation of class in runtime.
  */
-public class MachineController {
+public class Model {
 
-    private static MachineController instance = new MachineController();
-
-    public static MachineController getInstance() {
-        return instance;
-    }
+//    private static Model instance = new Model();
+//
+//    public static Model getInstance() {
+//        return instance;
+//    }
 
     private Devices devices;
     private Ingredients ingredients;
@@ -36,7 +36,7 @@ public class MachineController {
     private Containers containers;
     private BrewSequence brewStrategy;
 
-    private MachineController() {
+    public Model() {
         devices = Devices.getInstance();
         ingredients = Ingredients.getInstance();
         recipes = Recipes.getInstance();

@@ -17,6 +17,8 @@ public class Heater implements Device {
         ArgumentsValidator.nullArgument(name);
         ArgumentsValidator.emptyString(name);
 
+        this.name = name;
+
         temperature = 0d;
     }
 

@@ -19,6 +19,7 @@ public class RecipeMaker {
 
     private List<Ingredient> ingredients = new ArrayList<Ingredient>();
     private List<Ingredient> additives = new ArrayList<Ingredient>();
+    private String name;
 
     private RecipeMaker() {
     }
@@ -104,7 +105,7 @@ public class RecipeMaker {
         ArgumentsValidator.nullArgument(additives);
         ArgumentsValidator.emptyCollection(ingredients);
 
-        return new Recipe(ingredients, additives);
+        return new Recipe(name, ingredients, additives);
     }
 
     /**
@@ -158,6 +159,14 @@ public class RecipeMaker {
      */
     public Ingredient getIngredient(int ingredientIndex) {
         return ingredients.get(ingredientIndex);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 

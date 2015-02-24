@@ -24,11 +24,14 @@ public class Recipe {
      * @param ingredients List of ingredients
      * @param additives   List of additives
      */
-    public Recipe(List<Ingredient> ingredients, List<Ingredient> additives) {
+    public Recipe(String recipeName, List<Ingredient> ingredients, List<Ingredient> additives) {
 
         ArgumentsValidator.nullArgument(ingredients);
         ArgumentsValidator.nullArgument(additives);
         ArgumentsValidator.emptyCollection(ingredients);
+        ArgumentsValidator.nullArgument(recipeName);
+        ArgumentsValidator.emptyString(recipeName);
+
 
         this.ingredients.addAll(ingredients);
         this.additives.addAll(additives);

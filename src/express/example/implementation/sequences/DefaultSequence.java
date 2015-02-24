@@ -23,6 +23,7 @@ public class DefaultSequence implements BrewSequence {
     private Recipe recipe;
 
 
+    @Override
     public void setRecipe(Recipe recipe) {
         ArgumentsValidator.nullArgument(recipe);
         this.recipe = recipe;
@@ -60,14 +61,15 @@ public class DefaultSequence implements BrewSequence {
         }
     }
 
-    private void dispenseIngredients() {
+    private void dispenseIngredients() throws DeviceException {
         Device dispenser = controller.getDevice("Podajnik");
-        
+        dispenser.perform();
     }
 
 
-    private void addAdditives() {
-
+    private void addAdditives() throws DeviceException {
+        Device dispenser = controller.getDevice("Podajnik");
+        dispenser.perform();
     }
 
 
@@ -79,7 +81,6 @@ public class DefaultSequence implements BrewSequence {
     }
 
     private void liquidIngredientService(Liquid liquid) throws DeviceException {
-
         Device heater = controller.getDevice("Grzałka wody");
         Device pump = controller.getDevice("Pompa wody");
 
@@ -88,7 +89,6 @@ public class DefaultSequence implements BrewSequence {
 
         ((Pump) pump).setPressure(liquid.getPressure());
         pump.perform();
-
     }
 
 }

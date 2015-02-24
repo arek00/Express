@@ -1,8 +1,11 @@
 package express.example.implementation;
 
+import express.api.exceptions.DeviceException;
 import express.api.model.MachineController;
-import express.example.implementation.containers.LiquidContainer;
-import express.example.implementation.devices.*;
+import express.example.implementation.model.Model;
+import express.example.implementation.presenter.Presenter;
+import express.example.implementation.sequences.DefaultSequence;
+import express.example.implementation.view.ConsoleView;
 
 /**
  * Created by Admin on 2015-02-23.
@@ -10,12 +13,16 @@ import express.example.implementation.devices.*;
 public class Starter {
 
     public static void main(String[] args) {
-        MachineController expressController = MachineController.getInstance();
-        expressController.addDevice(new Heater("Grzałka wody"));
-        expressController.addDevice(new PressurePad("Czujnik kubka"));
-        expressController.addDevice(new Grinder("Młynek"));
-        expressController.addDevice(new Pump("Pompa wody"));
-        expressController.addDevice(new Dispenser("Podajnik"));
+        Initializer initializer = new Initializer();
+        initializer.initialize();
+
+
+        DefaultSequence sequence = new DefaultSequence();
+        MachineController.getInstance().setBrewStrategy(sequence);
+
+        Model model = new Model();
+        ConsoleView view = new ConsoleView();
+        Presenter presenter = new Presenter(view);
 
     }
 }
