@@ -84,10 +84,4 @@ public class RecipesTest {
 
         assertTrue(recipesNumber + 2 == recipes.getNumberRecipes());
     }
-
-    @Test
-    public void testGetNumberRecipes() {
-
-
-    }
 }
