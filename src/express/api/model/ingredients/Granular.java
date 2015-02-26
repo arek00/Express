@@ -12,11 +12,10 @@ public class Granular extends Ingredient {
     private boolean grounded;
 
     /**
-     * @param name      Name of ingredient.
-     * @param container Instance of container which stores this ingredient.
+     * @param name Name of ingredient.
      */
-    public Granular(String name, Container container) {
-        super(name, container);
+    public Granular(String name) {
+        super(name);
         this.grounded = false;
     }
 
@@ -35,6 +34,11 @@ public class Granular extends Ingredient {
      */
     public void setGrounded(boolean isGrounded) {
         this.grounded = isGrounded;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s : %.2f g.", getName(), getAmount());
     }
 
 }

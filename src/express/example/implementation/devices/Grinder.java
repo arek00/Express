@@ -5,27 +5,42 @@ import express.api.model.devices.Device;
 import express.api.utils.validators.ArgumentsValidator;
 
 /**
- * Created by Admin on 2015-02-23.
+ * Grinder representation.
  */
 public class Grinder implements Device {
 
-    String name;
+    private String name;
 
-    public Grinder(String name)
-    {
+    /**
+     * Create new grinder instance
+     *
+     * @param name name of device
+     */
+    public Grinder(String name) {
         ArgumentsValidator.nullArgument(name);
         ArgumentsValidator.emptyString(name);
 
         this.name = name;
     }
 
+    /**
+     * Order turning grinder on.
+     *
+     * @throws DeviceException
+     */
     @Override
     public void perform() throws DeviceException {
         /*
         Mieli składnik...
          */
+        System.out.println("Mielę");
     }
 
+    /**
+     * Get name of this device.
+     *
+     * @return Name of Device
+     */
     @Override
     public String getName() {
         return name;

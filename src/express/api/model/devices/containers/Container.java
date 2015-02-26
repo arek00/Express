@@ -68,11 +68,11 @@ public abstract class Container implements Device {
      */
     public Ingredient getIngredient() {
         if (ingredientType == Ingredients.LIQUID) {
-            return new Liquid(this.ingredientName, this);
+            return new Liquid(this.ingredientName);
         } else if (ingredientType == Ingredients.GRANULAR) {
-            return new Granular(this.ingredientName, this);
+            return new Granular(this.ingredientName);
         } else {
-            return new Ingredient(this.ingredientName, this);
+            return new Ingredient(this.ingredientName);
         }
     }
 

@@ -5,7 +5,7 @@ import express.api.model.MachineController;
 import express.example.implementation.model.Model;
 import express.example.implementation.presenter.Presenter;
 import express.example.implementation.sequences.DefaultSequence;
-import express.example.implementation.view.ConsoleView;
+import express.example.implementation.view.GraphicsView;
 
 /**
  * Created by Admin on 2015-02-23.
@@ -20,9 +20,17 @@ public class Starter {
         DefaultSequence sequence = new DefaultSequence();
         MachineController.getInstance().setBrewStrategy(sequence);
 
-        Model model = new Model();
-        ConsoleView view = new ConsoleView();
-        Presenter presenter = new Presenter(view);
+
+//        model.setBrewStrategy(sequence);
+//
+//
+        MachineController model = MachineController.getInstance();
+        model.setBrewStrategy(new DefaultSequence());//
+
+        GraphicsView view = new GraphicsView();
+        Presenter presenter = new Presenter(view, model);
+
+
 
     }
 }

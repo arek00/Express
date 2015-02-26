@@ -13,11 +13,9 @@ public class Ingredient {
     protected double amount;
 
     /**
-     *
      * @param name Name of ingredient.
-     * @param container Instance of container that stores that ingredient.
      */
-    public Ingredient(String name, Container container) {
+    public Ingredient(String name) {
         this.name = name;
         this.amount = 0d;
     }
@@ -27,15 +25,6 @@ public class Ingredient {
      */
     public String getName() {
         return name;
-    }
-
-    /**
-     * Get reference to container that stores this ingredient.
-     *
-     * @return reference to container
-     */
-    public Container getContainer() {
-        return container;
     }
 
     /**

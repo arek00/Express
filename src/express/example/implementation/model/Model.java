@@ -14,21 +14,9 @@ import express.api.model.recipes.Recipes;
 import java.util.Iterator;
 
 /**
- * Singleton.
- * Machine controller is a set of functions that let simplify usage of Express data's model API.
- * Machine controller is <b>facade</b> that contains methods to use basic functionality, mainly on Express' data structure
- * like sets of devices or recipes. It also let performs a brewing strategy.
- * <p/>
- * You should take an instance by calling getInstance() method as it is singleton class, there should be only single
- * representation of class in runtime.
+ * Model
  */
 public class Model {
-
-//    private static Model instance = new Model();
-//
-//    public static Model getInstance() {
-//        return instance;
-//    }
 
     private Devices devices;
     private Ingredients ingredients;

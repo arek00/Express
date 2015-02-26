@@ -5,46 +5,51 @@ import express.api.model.MachineController;
 import express.example.implementation.model.Model;
 import express.example.implementation.view.IView;
 
+import javax.crypto.Mac;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Created by Admin on 2015-02-24.
+ * Presenter
  */
 public class Presenter {
-    private MachineController machineController = MachineController.getInstance();
-    private List<IView> viewList = new ArrayList<IView>();
-    private Model model;
+    private IView view;
+    private MachineController model;
 
 
-    public Presenter(IView view, Model model) {
-        viewList.add(view);
+    public Presenter(IView view, MachineController model) {
         this.model = model;
-
+        this.view = view;
+        view.setStartBrewingSequenceListener(new StartBrewSequenceListener());
+        view.setRecipesListener(new RecipesListener());
+        view.setIngredientsListener(new IngredientsListener());
     }
 
 
     class StartBrewSequenceListener implements ActionListener {
-        IView view = viewList.get(0);
 
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent event) {
             try {
-                int index = Integer.getInteger(view.getRecipe());
-                model.performBrewSequence(model.getRecipe(index));
-            } catch (DeviceException e1) {
-                e1.printStackTrace();
+                model.performBrewSequence(view.getSelectedRecipe());
+            } catch (DeviceException exception) {
+                view.showError(exception.getMessage());
             }
         }
     }
 
-    class ChooseRecipeListener implements ActionListener {
+    class RecipesListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            viewList.get(0).setRecipes(model.getAllRecipes());
+            view.setRecipesList(model.getAllRecipes());
         }
     }
 
+    class IngredientsListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.setIngredientsList(model.getIngredients());
+        }
+    }
 }

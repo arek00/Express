@@ -62,8 +62,9 @@ public class Initializer {
         liquid.setPressure(1.2d);
         liquid.setAmount(250);
 
-        maker.addIngredient(liquid);
         maker.setName("Zwykła Kawa");
+        maker.addIngredient(liquid);
+
 
         Recipes.getInstance().addRecipe(maker.createRecipe());
         maker.clearRecipe();

@@ -6,19 +6,23 @@ import express.api.utils.validators.ArgumentsValidator;
 import express.api.utils.validators.NumbersValidator;
 
 /**
- * Created by Admin on 2015-02-23.
+ * Heater representation.
  */
 public class Heater implements Device {
 
     private double temperature;
     private String name;
 
+    /**
+     * Create new water heater instance
+     *
+     * @param name name of device
+     */
     public Heater(String name) {
         ArgumentsValidator.nullArgument(name);
         ArgumentsValidator.emptyString(name);
 
         this.name = name;
-
         temperature = 0d;
     }
 
@@ -33,17 +37,34 @@ public class Heater implements Device {
         this.temperature = temperature;
     }
 
+    /**
+     * Get temperature that has been ordered heat.
+     *
+     * @return temperature that liquid ingredient has to be warm.
+     */
     public double getTemperature() {
         return temperature;
     }
 
+    /**
+     * Order heating liquid ingredient process.
+     *
+     * @throws DeviceException
+     */
     @Override
     public void perform() throws DeviceException {
         /*
         Tutaj powinno wykonywać jakąś operację z API producenta z ustawioną temperaturą.
          */
+
+        System.out.println("Podgrzewam");
     }
 
+    /**
+     * Get name of this device.
+     *
+     * @return Name of Device
+     */
     @Override
     public String getName() {
         return name;

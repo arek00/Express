@@ -39,8 +39,6 @@ public class IngredientsTest {
         Ingredient entity;
 
         entity = ingredientIterator.next();
-
-
     }
 
 

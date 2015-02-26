@@ -169,5 +169,11 @@ public class RecipeMaker {
         this.name = name;
     }
 
+    @Override
+    public String toString()
+    {
+        return createRecipe().toString();
+    }
+
 
 }

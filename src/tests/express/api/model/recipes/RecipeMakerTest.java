@@ -40,6 +40,7 @@ public class RecipeMakerTest {
     public void restore() {
         maker.clearRecipe();
 
+        maker.setName("Test Recipe");
         maker.addAdditive(additive1);
         maker.addAdditive(additive2);
         maker.addIngredient(ingredient1);

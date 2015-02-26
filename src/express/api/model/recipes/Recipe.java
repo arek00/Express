@@ -32,7 +32,7 @@ public class Recipe {
         ArgumentsValidator.nullArgument(recipeName);
         ArgumentsValidator.emptyString(recipeName);
 
-
+        this.recipeName = recipeName;
         this.ingredients.addAll(ingredients);
         this.additives.addAll(additives);
     }
@@ -72,6 +72,39 @@ public class Recipe {
      */
     public String getRecipeName() {
         return recipeName;
+    }
+
+
+    /**
+     * Return string that lists ingredients and additives in that recipe.
+     * Returned string surely be multiline.
+     * Mainly for views purposes.
+     * <p/>
+     * Format of recipe:
+     * <p/>
+     * Ingredients:
+     * *List of ingredients*
+     * <p/>
+     * Additives:
+     * *List of additives*
+     *
+     * @return String that describe recipe
+     */
+    @Override
+    public String toString() {
+        String result = recipeName + " \nIngredients: \n";
+
+        for (Ingredient each : ingredients) {
+            result += each.toString() + " \n";
+        }
+
+        result += "Additives: \n";
+
+        for (Ingredient each : additives) {
+            result += each.toString() + " \n";
+        }
+
+        return result;
     }
 
 }

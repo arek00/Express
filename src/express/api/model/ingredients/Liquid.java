@@ -14,11 +14,10 @@ public class Liquid extends Ingredient {
     private double pressure;
 
     /**
-     * @param name      Name of liquid ingredient
-     * @param container Instance of container that stores this ingredient.
+     * @param name Name of liquid ingredient
      */
-    public Liquid(String name, Container container) {
-        super(name, container);
+    public Liquid(String name) {
+        super(name);
 
         this.temperature = 0;
         this.pressure = 0;
@@ -56,5 +55,10 @@ public class Liquid extends Ingredient {
     public void setPressure(double pressure) {
         NumbersValidator.negativeNumber(pressure);
         this.pressure = pressure;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s : %.2f ml %.2f \u2103 %.2f bars", getName(), getAmount(), getTemperature(), getPressure());
     }
 }

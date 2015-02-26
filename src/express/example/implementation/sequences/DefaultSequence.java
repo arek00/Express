@@ -15,7 +15,13 @@ import express.example.implementation.devices.Pump;
 import java.util.Iterator;
 
 /**
- * Created by Admin on 2015-02-24.
+ * Default sequence of performing brewing process.
+ * This process of brewing includes steps:
+ * * Getting ingredients from containers
+ * * Heat and pump liquid ingredient
+ * * Grind granular if there is need of it
+ * * Dispense ingredients
+ * * Prepare and dispense additives to drink
  */
 public class DefaultSequence implements BrewSequence {
 
@@ -23,28 +29,31 @@ public class DefaultSequence implements BrewSequence {
     private Recipe recipe;
 
 
+    /**
+     * Set recipe to perform.
+     *
+     * @param recipe
+     */
     @Override
     public void setRecipe(Recipe recipe) {
         ArgumentsValidator.nullArgument(recipe);
         this.recipe = recipe;
     }
 
-    /*
-    Get ingrediences
-    grind what need
-    heat water
-    pump
-    add additives
-    dispense
-     */
 
+    /**
+     * Perform sequence of brewing a drink. Read the description of class to get steps of this process.
+     *
+     * @throws DeviceException
+     */
     @Override
     public void perform() throws DeviceException {
+        System.out.println("Składniki");
         prepareIngredients(recipe.getIngredients());
         dispenseIngredients();
+        System.out.println("Dodatki");
         prepareIngredients(recipe.getAdditives());
         addAdditives();
-
     }
 
     private void prepareIngredients(Iterator<Ingredient> ingredients) throws DeviceException {
@@ -90,5 +99,4 @@ public class DefaultSequence implements BrewSequence {
         ((Pump) pump).setPressure(liquid.getPressure());
         pump.perform();
     }
-
 }

@@ -6,13 +6,18 @@ import express.api.utils.validators.ArgumentsValidator;
 import express.example.implementation.exceptions.PadNotPressedException;
 
 /**
- * Created by Admin on 2015-02-23.
+ * Pressure Pad representation.
  */
 public class PressurePad implements Device {
 
     private String name;
     private boolean isPressed;
 
+    /**
+     * Create new instance of pressure pad device
+     *
+     * @param name Name of device
+     */
     public PressurePad(String name) {
         ArgumentsValidator.nullArgument(name);
         ArgumentsValidator.emptyString(name);
@@ -21,14 +26,33 @@ public class PressurePad implements Device {
         isPressed = false;
     }
 
-    public void padPressed() {
+    /**
+     * Calls when pad has been pressed.
+     */
+    public void pressed() {
         isPressed = true;
     }
 
-    public void padReleased() {
+    /**
+     * Calls when pad has been released.
+     */
+    public void released() {
         isPressed = false;
     }
 
+    /**
+     * @return State of pad.
+     */
+    public boolean isPressed() {
+        return isPressed;
+    }
+
+    /**
+     * Perform operation of Pressure pad. Should stop dispense or stop process of brewing when is not
+     * pressed before dispense process
+     *
+     * @throws DeviceException
+     */
     @Override
     public void perform() throws DeviceException {
         if (!isPressed) {
@@ -36,6 +60,11 @@ public class PressurePad implements Device {
         }
     }
 
+    /**
+     * Get name of this device.
+     *
+     * @return Name of Device
+     */
     @Override
     public String getName() {
         return name;
