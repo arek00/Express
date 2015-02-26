@@ -92,11 +92,11 @@ public abstract class Container implements Device {
     }
 
     private void validateArguments(String name, String ingredientName, int ingredientType, double containerState) {
-        ArgumentsValidator.nullArgument(name);
-        ArgumentsValidator.nullArgument(ingredientName);
-        ArgumentsValidator.nullArgument(ingredientType);
-        ArgumentsValidator.emptyString(name);
-        ArgumentsValidator.emptyString(ingredientName);
+        ArgumentsValidator.notNull(name);
+        ArgumentsValidator.notNull(ingredientName);
+        ArgumentsValidator.notNull(ingredientType);
+        ArgumentsValidator.stringNotEmpty(name);
+        ArgumentsValidator.stringNotEmpty(ingredientName);
         NumbersValidator.negativeNumber(containerState);
         validateIngredientType(ingredientType);
     }

@@ -36,7 +36,7 @@ public class DefaultSequence implements BrewSequence {
      */
     @Override
     public void setRecipe(Recipe recipe) {
-        ArgumentsValidator.nullArgument(recipe);
+        ArgumentsValidator.notNull(recipe);
         this.recipe = recipe;
     }
 

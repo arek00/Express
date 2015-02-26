@@ -1,5 +1,7 @@
 package express.api.model.recipes;
 
+import express.api.utils.validators.ArgumentsValidator;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -42,6 +44,8 @@ public class Recipes {
      * @param recipe Recipe that must be collected in.
      */
     public void addRecipe(Recipe recipe) {
+        ArgumentsValidator.notNull(recipe);
+
         if (!recipe.getIngredients().hasNext()) {
             throw new IllegalArgumentException("Ingredients can't be empty");
         }

@@ -37,6 +37,7 @@ public class RecipeMaker {
      * @param ingredient instance of ingredient.
      */
     public void addIngredient(Ingredient ingredient) {
+        ArgumentsValidator.notNull(ingredient);
         ingredients.add(ingredient);
     }
 
@@ -46,6 +47,7 @@ public class RecipeMaker {
      * @param additive Ingredient that will be additive to drink.
      */
     public void addAdditive(Ingredient additive) {
+        ArgumentsValidator.notNull(additive);
         additives.add(additive);
     }
 
@@ -101,9 +103,9 @@ public class RecipeMaker {
      * @return Instance of Recipe
      */
     public Recipe createRecipe() {
-        ArgumentsValidator.nullArgument(ingredients);
-        ArgumentsValidator.nullArgument(additives);
-        ArgumentsValidator.emptyCollection(ingredients);
+        ArgumentsValidator.notNull(ingredients);
+        ArgumentsValidator.notNull(additives);
+        ArgumentsValidator.collectionNotEmpty(ingredients);
 
         return new Recipe(name, ingredients, additives);
     }
@@ -133,7 +135,7 @@ public class RecipeMaker {
      * @param recipe Recipe to set in maker.
      */
     public void setIngredientsFromRecipe(Recipe recipe) {
-        ArgumentsValidator.nullArgument(recipe);
+        ArgumentsValidator.notNull(recipe);
 
         Collection<Ingredient> copyCollection;
         clearRecipe();
@@ -170,8 +172,7 @@ public class RecipeMaker {
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return createRecipe().toString();
     }
 

@@ -4,6 +4,7 @@ import express.api.model.ingredients.Ingredient;
 import express.api.model.recipes.Recipe;
 import express.api.model.recipes.Recipes;
 
+import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
 
@@ -12,18 +13,22 @@ import java.util.Iterator;
  */
 public interface IView {
 
-    public void setStartBrewingSequenceListener(ActionListener listener);
-
     public void setRecipesListener(ActionListener listener);
+
+    public void setRecipes(Iterator<Recipe> recipes);
 
     public void setIngredientsListener(ActionListener listener);
 
-    public Recipe getSelectedRecipe();
+    public void setIngredients(Iterator<Ingredient> ingredients);
 
-    public void setIngredientsList(Iterator<Ingredient> ingredients);
+    public void setIngredientListener(ActionListener listener);
 
-    public void setRecipesList(Iterator<Recipe> recipesIterator);
+    public void setAdditiveListener(ActionListener listener);
 
-    public void showError(String message);
+    public Ingredient getIngredient();
+
+    public Ingredient getAdditive();
+
+    public void setRecipeDescription(String description);
 
 }

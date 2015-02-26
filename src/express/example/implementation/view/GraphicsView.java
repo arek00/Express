@@ -19,8 +19,9 @@ import java.util.Iterator;
 public class GraphicsView implements IView {
 
     private MainMenu menu = new MainMenu();
-    private SelectRecipeMenu selectRecipeMenu = new SelectRecipeMenu();
-    private CreateRecipeMenu createRecipeMenu = new CreateRecipeMenu();
+    private SelectRecipeMenu selectRecipeMenu = new SelectRecipeMenu(menu);
+    private CreateRecipeMenu createRecipeMenu = new CreateRecipeMenu(menu);
+
     private ActionListener recipesListener;
     private ActionListener ingredientsListener;
 
@@ -31,21 +32,15 @@ public class GraphicsView implements IView {
         menu.setCreateRecipeButtonListener(new CreateRecipeListener());
     }
 
-
-    public void setRecipesList(Iterator<Recipe> recipesList) {
-        Collection<Recipe> recipeCollection = IteratorConverter.toCollection(recipesList);
-        selectRecipeMenu.setRecipesListData(recipeCollection.toArray());
-    }
-
-
-    @Override
-    public void setStartBrewingSequenceListener(ActionListener listener) {
-        selectRecipeMenu.setStartBrewingListener(listener);
-    }
-
     @Override
     public void setRecipesListener(ActionListener listener) {
-        recipesListener = listener;
+        this.recipesListener = listener;
+    }
+
+    @Override
+    public void setRecipes(Iterator<Recipe> recipes) {
+        Collection<Recipe> collection = IteratorConverter.toCollection(recipes);
+        selectRecipeMenu.setRecipes(collection.toArray());
     }
 
     @Override
@@ -54,21 +49,36 @@ public class GraphicsView implements IView {
     }
 
     @Override
-    public Recipe getSelectedRecipe() {
-        return selectRecipeMenu.getSelectedRecipe();
+    public void setIngredients(Iterator<Ingredient> ingredients) {
+        Collection<Ingredient> collection = IteratorConverter.toCollection(ingredients);
+        createRecipeMenu.setIngredientsList(collection.toArray());
+        createRecipeMenu.setAdditivesList(collection.toArray());
+
     }
 
     @Override
-    public void setIngredientsList(Iterator<Ingredient> ingredients) {
-        Collection<Ingredient> ingredientsCollection = IteratorConverter.toCollection(ingredients);
-
-        createRecipeMenu.setIngredientsList(ingredientsCollection.toArray());
-        createRecipeMenu.setAdditivesList(ingredientsCollection.toArray());
+    public void setIngredientListener(ActionListener listener) {
+        createRecipeMenu.addSetIngredientListener(listener);
     }
 
     @Override
-    public void showError(String message) {
-        JOptionPane.showMessageDialog(null, message);
+    public void setAdditiveListener(ActionListener listener) {
+        createRecipeMenu.addSetAdditiveListener(listener);
+    }
+
+    @Override
+    public Ingredient getIngredient() {
+        return createRecipeMenu.getIngredient();
+    }
+
+    @Override
+    public Ingredient getAdditive() {
+        return createRecipeMenu.getAdditive();
+    }
+
+    @Override
+    public void setRecipeDescription(String description) {
+        createRecipeMenu.setRecipeDescription(description);
     }
 
 

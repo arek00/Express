@@ -14,5 +14,10 @@ public interface BrewSequence {
      */
     public void perform() throws DeviceException;
 
+    /**
+     * Set recipe that will be use in process of brewing.
+     *
+     * @param recipe recipe to brew
+     */
     public void setRecipe(Recipe recipe);
 }

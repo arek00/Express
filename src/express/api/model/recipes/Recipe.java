@@ -26,11 +26,11 @@ public class Recipe {
      */
     public Recipe(String recipeName, List<Ingredient> ingredients, List<Ingredient> additives) {
 
-        ArgumentsValidator.nullArgument(ingredients);
-        ArgumentsValidator.nullArgument(additives);
-        ArgumentsValidator.emptyCollection(ingredients);
-        ArgumentsValidator.nullArgument(recipeName);
-        ArgumentsValidator.emptyString(recipeName);
+        ArgumentsValidator.notNull(ingredients);
+        ArgumentsValidator.notNull(additives);
+        ArgumentsValidator.collectionNotEmpty(ingredients);
+        ArgumentsValidator.notNull(recipeName);
+        ArgumentsValidator.stringNotEmpty(recipeName);
 
         this.recipeName = recipeName;
         this.ingredients.addAll(ingredients);

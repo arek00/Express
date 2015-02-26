@@ -19,8 +19,8 @@ public class PressurePad implements Device {
      * @param name Name of device
      */
     public PressurePad(String name) {
-        ArgumentsValidator.nullArgument(name);
-        ArgumentsValidator.emptyString(name);
+        ArgumentsValidator.notNull(name);
+        ArgumentsValidator.stringNotEmpty(name);
 
         this.name = name;
         isPressed = false;

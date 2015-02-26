@@ -33,11 +33,11 @@ public class Devices {
      * @return Reference to device.
      */
     public Device getDevice(String deviceName) {
-        ArgumentsValidator.nullArgument(deviceName);
-        ArgumentsValidator.emptyString(deviceName);
+        ArgumentsValidator.notNull(deviceName);
+        ArgumentsValidator.stringNotEmpty(deviceName);
 
         Device device = devices.get(deviceName);
-        ArgumentsValidator.nullReturn(device);
+        ArgumentsValidator.returnNotNull(device);
 
         return device;
     }
@@ -59,7 +59,7 @@ public class Devices {
      * @param device instance of device.
      */
     public void addDevice(Device device) {
-        ArgumentsValidator.nullArgument(device);
+        ArgumentsValidator.notNull(device);
         checkUniqueName(device.getName());
 
         devices.put(device.getName(), device);
@@ -89,8 +89,8 @@ public class Devices {
      * @param deviceName name of device to remove.
      */
     public void removeDevice(String deviceName) {
-        ArgumentsValidator.nullArgument(deviceName);
-        ArgumentsValidator.emptyString(deviceName);
+        ArgumentsValidator.notNull(deviceName);
+        ArgumentsValidator.stringNotEmpty(deviceName);
 
         devices.remove(deviceName);
     }

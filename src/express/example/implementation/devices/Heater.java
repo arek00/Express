@@ -19,8 +19,8 @@ public class Heater implements Device {
      * @param name name of device
      */
     public Heater(String name) {
-        ArgumentsValidator.nullArgument(name);
-        ArgumentsValidator.emptyString(name);
+        ArgumentsValidator.notNull(name);
+        ArgumentsValidator.stringNotEmpty(name);
 
         this.name = name;
         temperature = 0d;

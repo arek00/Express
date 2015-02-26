@@ -1,6 +1,7 @@
 package express.api.model.ingredients;
 
 import express.api.model.devices.containers.Container;
+import express.api.utils.validators.ArgumentsValidator;
 import express.api.utils.validators.NumbersValidator;
 
 /**
@@ -16,6 +17,10 @@ public class Ingredient {
      * @param name Name of ingredient.
      */
     public Ingredient(String name) {
+
+        ArgumentsValidator.notNull(name);
+        ArgumentsValidator.stringNotEmpty(name);
+
         this.name = name;
         this.amount = 0d;
     }

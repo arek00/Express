@@ -36,9 +36,15 @@ public class Granular extends Ingredient {
         this.grounded = isGrounded;
     }
 
+    /**
+     * Return string representation of Granular ingredient.
+     * Format: Name : amount unit
+     *
+     * @return Ingredient as string
+     */
     @Override
     public String toString() {
-        return String.format("%s : %.2f g.", getName(), getAmount());
+        return String.format("%s : %.2f %s.", getName(), getAmount(), "g");
     }
 
 }

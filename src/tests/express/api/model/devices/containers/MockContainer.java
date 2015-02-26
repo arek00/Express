@@ -18,7 +18,7 @@ public class MockContainer extends Container {
     }
 
     public void setIngredient(Ingredient ingredient) {
-        ArgumentsValidator.nullArgument(ingredient);
+        ArgumentsValidator.notNull(ingredient);
         this.ingredient = ingredient;
     }
 

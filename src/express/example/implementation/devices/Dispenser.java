@@ -30,7 +30,6 @@ public class Dispenser implements Device {
         /*
          Funkcjonalność podajnika
          */
-        System.out.println("Nalewam");
     }
 
     /**

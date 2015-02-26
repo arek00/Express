@@ -2,7 +2,6 @@ package express.example.implementation.presenter;
 
 import express.api.exceptions.DeviceException;
 import express.api.model.MachineController;
-import express.example.implementation.model.Model;
 import express.example.implementation.view.IView;
 
 import javax.crypto.Mac;
@@ -16,32 +15,29 @@ public class Presenter {
     private IView view;
     private MachineController model;
 
-
+    /**
+     *
+     * @param view
+     * @param model
+     */
     public Presenter(IView view, MachineController model) {
         this.model = model;
         this.view = view;
-        view.setStartBrewingSequenceListener(new StartBrewSequenceListener());
+
         view.setRecipesListener(new RecipesListener());
         view.setIngredientsListener(new IngredientsListener());
+        view.setIngredientListener(new AddIngredient());
+        view.setAdditiveListener(new AddAdditive());
     }
 
-
-    class StartBrewSequenceListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent event) {
-            try {
-                model.performBrewSequence(view.getSelectedRecipe());
-            } catch (DeviceException exception) {
-                view.showError(exception.getMessage());
-            }
-        }
-    }
-
+    /**
+     *
+     */
     class RecipesListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
-            view.setRecipesList(model.getAllRecipes());
+            view.setRecipes(model.getAllRecipes());
         }
     }
 
@@ -49,7 +45,24 @@ public class Presenter {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            view.setIngredientsList(model.getIngredients());
+            view.setIngredients(model.getIngredients());
+        }
+    }
+
+    class AddIngredient implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            model.addIngredientToMaker(view.getIngredient());
+            view.setRecipeDescription(model.createRecipe().toString());
+        }
+    }
+
+    class AddAdditive implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            model.addAdditiveToMaker(view.getIngredient());
+            view.setRecipeDescription(model.createRecipe().toString());
         }
     }
 }

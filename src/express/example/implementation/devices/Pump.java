@@ -20,8 +20,8 @@ public class Pump implements Device {
      * @param pressure Set pressure that should be pumped, in bars
      */
     public Pump(String name, double pressure) {
-        ArgumentsValidator.nullArgument(name);
-        ArgumentsValidator.emptyString(name);
+        ArgumentsValidator.notNull(name);
+        ArgumentsValidator.stringNotEmpty(name);
         NumbersValidator.negativeNumber(pressure);
 
         this.name = name;

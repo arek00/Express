@@ -4,56 +4,189 @@
 
 package express.example.implementation.view.forms;
 
+import javax.swing.event.*;
+
+import express.api.model.ingredients.Granular;
+import express.api.model.ingredients.Ingredient;
+import express.api.model.ingredients.Liquid;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * @author Arkadiusz Pikulski
  */
-public class CreateRecipeMenu extends JFrame {
-    public CreateRecipeMenu() {
+public class CreateRecipeMenu extends JDialog {
+
+    private Ingredient ingredient;
+    private ActionListener setIngredientListener;
+    private ActionListener setAdditiveListener;
+
+    public CreateRecipeMenu(JFrame owner) {
+        super(owner);
         initComponents();
+        setListsListeners();
+        addGranularButton.addActionListener(new HidePanelsListener());
+        addLiquidButton.addActionListener(new HidePanelsListener());
     }
+
+    private void setListsListeners() {
+        additivesList.addListSelectionListener(new IngredientsListListener(additivesList));
+        ingredientsList.addListSelectionListener(new IngredientsListListener(ingredientsList));
+    }
+
+    public void setIngredientsList(Object[] items) {
+        ingredientsList.setListData(items);
+    }
+
+    public void setAdditivesList(Object[] items) {
+        additivesList.setListData(items);
+    }
+
+    public void addSetIngredientListener(ActionListener listener) {
+        this.setIngredientListener = listener;
+    }
+
+    public void addSetAdditiveListener(ActionListener listener) {
+        this.setAdditiveListener = listener;
+    }
+
+    public Ingredient getIngredient() {
+        return ingredient;
+    }
+
+    public Ingredient getAdditive() {
+        return ingredient;
+    }
+
+
+    private void hidePanels() {
+        granularEditionPanel.setVisible(false);
+        liquidEditPanel.setVisible(false);
+    }
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Arkadiusz Pikulski
+        liquidEditPanel = new JPanel();
+        liquidNameLabel = new JLabel();
+        temperatureField = new JTextField();
+        pressureField = new JTextField();
+        addLiquidButton = new JButton();
+        liquidValueSlider = new JSlider();
+        liquidAmountLabel = new JLabel();
+        liquidValueLabel = new JLabel();
+        liquidUnitLabel = new JLabel();
+        temperatureLabel = new JLabel();
+        pressureLabel = new JLabel();
         recipeNameField = new JTextField();
         scrollPane1 = new JScrollPane();
-        ingedientsList = new JList();
-        label1 = new JLabel();
-        label2 = new JLabel();
+        ingredientsList = new JList();
+        RecipeNameLabel = new JLabel();
+        ingredientsLabel = new JLabel();
         scrollPane2 = new JScrollPane();
         additivesList = new JList();
-        label3 = new JLabel();
-        button1 = new JButton();
-        button2 = new JButton();
+        additivesLabel = new JLabel();
         scrollPane3 = new JScrollPane();
         currentRecipe = new JTextArea();
-        button3 = new JButton();
+        createRecipeButton = new JButton();
+        granularEditionPanel = new JPanel();
+        granularNameLabel = new JLabel();
+        granularAmountSlider = new JSlider();
+        granularAmountLabel = new JLabel();
+        granularValueLabel = new JLabel();
+        unitLabel = new JLabel();
+        granularGrindingSwitch = new JToggleButton();
+        grindLabel = new JLabel();
+        addGranularButton = new JButton();
 
         //======== this ========
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
+
+        //======== liquidEditPanel ========
+        {
+            liquidEditPanel.setVisible(false);
+
+            // JFormDesigner evaluation mark
+            liquidEditPanel.setBorder(new javax.swing.border.CompoundBorder(
+                    new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
+                            "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
+                            javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                            java.awt.Color.red), liquidEditPanel.getBorder()));
+            liquidEditPanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+                public void propertyChange(java.beans.PropertyChangeEvent e) {
+                    if ("border".equals(e.getPropertyName())) throw new RuntimeException();
+                }
+            });
+
+            liquidEditPanel.setLayout(null);
+
+            //---- liquidNameLabel ----
+            liquidNameLabel.setText("INGREDIENT NAME");
+            liquidEditPanel.add(liquidNameLabel);
+            liquidNameLabel.setBounds(10, 10, 115, liquidNameLabel.getPreferredSize().height);
+            liquidEditPanel.add(temperatureField);
+            temperatureField.setBounds(15, 130, 105, temperatureField.getPreferredSize().height);
+            liquidEditPanel.add(pressureField);
+            pressureField.setBounds(165, 130, 105, pressureField.getPreferredSize().height);
+
+            //---- addLiquidButton ----
+            addLiquidButton.setText("Add");
+            liquidEditPanel.add(addLiquidButton);
+            addLiquidButton.setBounds(new Rectangle(new Point(265, 155), addLiquidButton.getPreferredSize()));
+            liquidEditPanel.add(liquidValueSlider);
+            liquidValueSlider.setBounds(new Rectangle(new Point(15, 70), liquidValueSlider.getPreferredSize()));
+
+            //---- liquidAmountLabel ----
+            liquidAmountLabel.setText("Amount:");
+            liquidEditPanel.add(liquidAmountLabel);
+            liquidAmountLabel.setBounds(15, 40, 60, liquidAmountLabel.getPreferredSize().height);
+
+            //---- liquidValueLabel ----
+            liquidValueLabel.setText("VALUE");
+            liquidEditPanel.add(liquidValueLabel);
+            liquidValueLabel.setBounds(65, 40, 50, liquidValueLabel.getPreferredSize().height);
+
+            //---- liquidUnitLabel ----
+            liquidUnitLabel.setText("liters");
+            liquidEditPanel.add(liquidUnitLabel);
+            liquidUnitLabel.setBounds(110, 40, 45, liquidUnitLabel.getPreferredSize().height);
+
+            //---- temperatureLabel ----
+            temperatureLabel.setText("Temperature (in Celsius)");
+            liquidEditPanel.add(temperatureLabel);
+            temperatureLabel.setBounds(5, 105, 145, temperatureLabel.getPreferredSize().height);
+
+            //---- pressureLabel ----
+            pressureLabel.setText("Pressure (in Bar)");
+            liquidEditPanel.add(pressureLabel);
+            pressureLabel.setBounds(165, 105, 125, pressureLabel.getPreferredSize().height);
+        }
+        contentPane.add(liquidEditPanel);
+        liquidEditPanel.setBounds(10, 280, 335, 190);
         contentPane.add(recipeNameField);
         recipeNameField.setBounds(105, 5, 265, recipeNameField.getPreferredSize().height);
 
         //======== scrollPane1 ========
         {
-            scrollPane1.setViewportView(ingedientsList);
+            scrollPane1.setViewportView(ingredientsList);
         }
         contentPane.add(scrollPane1);
-        scrollPane1.setBounds(10, 55, 75, 175);
+        scrollPane1.setBounds(10, 55, 75, 170);
 
-        //---- label1 ----
-        label1.setText("Recipe Name");
-        contentPane.add(label1);
-        label1.setBounds(new Rectangle(new Point(10, 5), label1.getPreferredSize()));
+        //---- RecipeNameLabel ----
+        RecipeNameLabel.setText("Recipe Name");
+        contentPane.add(RecipeNameLabel);
+        RecipeNameLabel.setBounds(new Rectangle(new Point(10, 5), RecipeNameLabel.getPreferredSize()));
 
-        //---- label2 ----
-        label2.setText("Ingredients");
-        contentPane.add(label2);
-        label2.setBounds(new Rectangle(new Point(10, 30), label2.getPreferredSize()));
+        //---- ingredientsLabel ----
+        ingredientsLabel.setText("Ingredients");
+        contentPane.add(ingredientsLabel);
+        ingredientsLabel.setBounds(new Rectangle(new Point(10, 30), ingredientsLabel.getPreferredSize()));
 
         //======== scrollPane2 ========
         {
@@ -62,20 +195,10 @@ public class CreateRecipeMenu extends JFrame {
         contentPane.add(scrollPane2);
         scrollPane2.setBounds(105, 55, 75, 170);
 
-        //---- label3 ----
-        label3.setText("Additives");
-        contentPane.add(label3);
-        label3.setBounds(new Rectangle(new Point(105, 30), label3.getPreferredSize()));
-
-        //---- button1 ----
-        button1.setText("Add Ingredient");
-        contentPane.add(button1);
-        button1.setBounds(5, 235, 80, 26);
-
-        //---- button2 ----
-        button2.setText("Add Additive");
-        contentPane.add(button2);
-        button2.setBounds(105, 235, 75, button2.getPreferredSize().height);
+        //---- additivesLabel ----
+        additivesLabel.setText("Additives");
+        contentPane.add(additivesLabel);
+        additivesLabel.setBounds(new Rectangle(new Point(105, 30), additivesLabel.getPreferredSize()));
 
         //======== scrollPane3 ========
         {
@@ -87,10 +210,55 @@ public class CreateRecipeMenu extends JFrame {
         contentPane.add(scrollPane3);
         scrollPane3.setBounds(200, 50, 145, 175);
 
-        //---- button3 ----
-        button3.setText("Create Recipe");
-        contentPane.add(button3);
-        button3.setBounds(205, 235, 140, button3.getPreferredSize().height);
+        //---- createRecipeButton ----
+        createRecipeButton.setText("Create Recipe");
+        contentPane.add(createRecipeButton);
+        createRecipeButton.setBounds(205, 235, 140, createRecipeButton.getPreferredSize().height);
+
+        //======== granularEditionPanel ========
+        {
+            granularEditionPanel.setVisible(false);
+            granularEditionPanel.setLayout(null);
+
+            //---- granularNameLabel ----
+            granularNameLabel.setText("INGREDIENT NAME");
+            granularEditionPanel.add(granularNameLabel);
+            granularNameLabel.setBounds(15, 15, 125, granularNameLabel.getPreferredSize().height);
+            granularEditionPanel.add(granularAmountSlider);
+            granularAmountSlider.setBounds(new Rectangle(new Point(15, 80), granularAmountSlider.getPreferredSize()));
+
+            //---- granularAmountLabel ----
+            granularAmountLabel.setText("Amount");
+            granularEditionPanel.add(granularAmountLabel);
+            granularAmountLabel.setBounds(new Rectangle(new Point(15, 55), granularAmountLabel.getPreferredSize()));
+
+            //---- granularValueLabel ----
+            granularValueLabel.setText("value");
+            granularEditionPanel.add(granularValueLabel);
+            granularValueLabel.setBounds(65, 55, 40, granularValueLabel.getPreferredSize().height);
+
+            //---- unitLabel ----
+            unitLabel.setText("grams");
+            granularEditionPanel.add(unitLabel);
+            unitLabel.setBounds(105, 55, 45, unitLabel.getPreferredSize().height);
+
+            //---- granularGrindingSwitch ----
+            granularGrindingSwitch.setText("Off");
+            granularEditionPanel.add(granularGrindingSwitch);
+            granularGrindingSwitch.setBounds(new Rectangle(new Point(20, 120), granularGrindingSwitch.getPreferredSize()));
+
+            //---- grindLabel ----
+            grindLabel.setText("Grind:");
+            granularEditionPanel.add(grindLabel);
+            grindLabel.setBounds(20, 100, 60, grindLabel.getPreferredSize().height);
+
+            //---- addGranularButton ----
+            addGranularButton.setText("Add");
+            granularEditionPanel.add(addGranularButton);
+            addGranularButton.setBounds(225, 180, 76, 26);
+        }
+        contentPane.add(granularEditionPanel);
+        granularEditionPanel.setBounds(10, 270, 340, 215);
 
         { // compute preferred size
             Dimension preferredSize = new Dimension();
@@ -108,32 +276,123 @@ public class CreateRecipeMenu extends JFrame {
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
+
     }
-
-
-    public void setIngredientsList(Object[] items) {
-        ingedientsList.setListData(items);
-    }
-
-    public void setAdditivesList(Object[] items) {
-        additivesList.setListData(items);
-    }
-
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Arkadiusz Pikulski
+    private JPanel liquidEditPanel;
+    private JLabel liquidNameLabel;
+    private JTextField temperatureField;
+    private JTextField pressureField;
+    private JButton addLiquidButton;
+    private JSlider liquidValueSlider;
+    private JLabel liquidAmountLabel;
+    private JLabel liquidValueLabel;
+    private JLabel liquidUnitLabel;
+    private JLabel temperatureLabel;
+    private JLabel pressureLabel;
     private JTextField recipeNameField;
     private JScrollPane scrollPane1;
-    private JList ingedientsList;
-    private JLabel label1;
-    private JLabel label2;
+    private JList ingredientsList;
+    private JLabel RecipeNameLabel;
+    private JLabel ingredientsLabel;
     private JScrollPane scrollPane2;
     private JList additivesList;
-    private JLabel label3;
-    private JButton button1;
-    private JButton button2;
+    private JLabel additivesLabel;
     private JScrollPane scrollPane3;
     private JTextArea currentRecipe;
-    private JButton button3;
+    private JButton createRecipeButton;
+    private JPanel granularEditionPanel;
+    private JLabel granularNameLabel;
+    private JSlider granularAmountSlider;
+    private JLabel granularAmountLabel;
+    private JLabel granularValueLabel;
+    private JLabel unitLabel;
+    private JToggleButton granularGrindingSwitch;
+    private JLabel grindLabel;
+    private JButton addGranularButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+
+
+    class IngredientsListListener implements ListSelectionListener {
+        private JList list;
+
+        public IngredientsListListener(JList list) {
+            this.list = list;
+        }
+
+        private void setGranularPanelValues(Granular selectedValue) {
+            granularValueLabel.setText(Double.toString(selectedValue.getAmount()));
+            granularAmountSlider.setValue((int) selectedValue.getAmount());
+            granularNameLabel.setText(selectedValue.getName());
+        }
+
+        private void setLiquidPanelValue(Liquid selectedValue) {
+            liquidValueLabel.setText(Double.toString(selectedValue.getAmount()));
+            liquidNameLabel.setText(selectedValue.getName());
+            liquidValueSlider.setValue((int) selectedValue.getAmount());
+            temperatureField.setText(Double.toString(selectedValue.getTemperature()));
+            pressureField.setText(Double.toString(selectedValue.getPressure()));
+        }
+
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            ingredient = (Ingredient) list.getSelectedValue();
+            hidePanels();
+            clearListeners();
+            setButtonListener();
+            setPanelType(ingredient);
+
+        }
+
+        private void setButtonListener() {
+            if (this.list == additivesList) {
+                addLiquidButton.addActionListener(setAdditiveListener);
+                addGranularButton.addActionListener(setAdditiveListener);
+
+            } else if (this.list == ingredientsList) {
+                addLiquidButton.addActionListener(setIngredientListener);
+                addGranularButton.addActionListener(setIngredientListener);
+            }
+
+
+        }
+
+        private void clearListeners() {
+
+            for (ActionListener each : addLiquidButton.getActionListeners()) {
+                addLiquidButton.removeActionListener(each);
+            }
+            for (ActionListener each : addGranularButton.getActionListeners()) {
+                addGranularButton.removeActionListener(each);
+            }
+        }
+
+        private void setPanelType(Ingredient ingredient) {
+
+            if (ingredient instanceof Granular) {
+                granularEditionPanel.setVisible(true);
+                setGranularPanelValues((Granular) ingredient);
+
+            } else if (ingredient instanceof Liquid) {
+                liquidEditPanel.setVisible(true);
+                setLiquidPanelValue((Liquid) ingredient);
+            }
+        }
+    }
+
+    class HidePanelsListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            hidePanels();
+        }
+
+    }
+
+    public void setRecipeDescription(String description) {
+        currentRecipe.setText(description);
+    }
+
 }

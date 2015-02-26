@@ -49,30 +49,30 @@ public class ContainersTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testAddContainer() {
-        int containersNumber = containers.getContainersNumber();
+        int containersNumber = containers.getNumberOfContainers();
         assertTrue(containersNumber == 3);
 
         containers.addContainer(container1);
-        assertTrue(containers.getContainersNumber() == 3);
+        assertTrue(containers.getNumberOfContainers() == 3);
     }
 
     @Test
     public void testRemoveContainer() {
 
-        assertTrue(containers.getContainersNumber() == 3);
+        assertTrue(containers.getNumberOfContainers() == 3);
 
-        int containerSize = containers.getContainersNumber();
+        int containerSize = containers.getNumberOfContainers();
 
         containers.removeContainer(container2);
         containers.removeContainer("Mleko");
 
-        assertTrue(containers.getContainersNumber() == 1);
+        assertTrue(containers.getNumberOfContainers() == 1);
 
     }
 
     @Test
     public void testGetContainersNumber() {
-        assertTrue(containers.getContainersNumber() == 3);
+        assertTrue(containers.getNumberOfContainers() == 3);
     }
 
     @Test

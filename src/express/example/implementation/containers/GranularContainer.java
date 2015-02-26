@@ -28,7 +28,7 @@ public class GranularContainer extends Container {
      * @param ingredient ingredient that's amount property has been set.
      */
     public void setIngredient(Ingredient ingredient) {
-        ArgumentsValidator.nullArgument(ingredient);
+        ArgumentsValidator.notNull(ingredient);
 
         this.ingredient = ingredient;
     }

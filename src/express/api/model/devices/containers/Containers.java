@@ -31,7 +31,7 @@ public class Containers {
      * @param container Container
      */
     public void addContainer(Container container) {
-        ArgumentsValidator.nullArgument(container);
+        ArgumentsValidator.notNull(container);
         checkUnique(container);
 
         containers.put(container.getName(), container);
@@ -43,7 +43,7 @@ public class Containers {
      * @param container Instance of container to remove from set.
      */
     public void removeContainer(Container container) {
-        ArgumentsValidator.nullArgument(container);
+        ArgumentsValidator.notNull(container);
 
         removeContainer(container.getName());
     }
@@ -54,8 +54,8 @@ public class Containers {
      * @param containerName Name of container to remove.
      */
     public void removeContainer(String containerName) {
-        ArgumentsValidator.nullArgument(containerName);
-        ArgumentsValidator.emptyString(containerName);
+        ArgumentsValidator.notNull(containerName);
+        ArgumentsValidator.stringNotEmpty(containerName);
 
         containers.remove(containerName);
     }
@@ -65,7 +65,7 @@ public class Containers {
      *
      * @return Amount of containers.
      */
-    public int getContainersNumber() {
+    public int getNumberOfContainers() {
         return containers.size();
     }
 
@@ -84,11 +84,11 @@ public class Containers {
      * @return Instance of container with that name
      */
     public Container getContainer(String containerName) {
-        ArgumentsValidator.nullArgument(containerName);
-        ArgumentsValidator.emptyString(containerName);
+        ArgumentsValidator.notNull(containerName);
+        ArgumentsValidator.stringNotEmpty(containerName);
 
         Container container = containers.get(containerName);
-        ArgumentsValidator.nullReturn(container);
+        ArgumentsValidator.returnNotNull(container);
 
         return container;
     }

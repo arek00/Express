@@ -57,6 +57,12 @@ public class Liquid extends Ingredient {
         this.pressure = pressure;
     }
 
+    /**
+     * Returns string representation of Liquid ingredient.
+     * Format: %Name% : %Amount% ml %Temperature% C %Pressure% bars.
+     *
+     * @return Liquid as String
+     */
     @Override
     public String toString() {
         return String.format("%s : %.2f ml %.2f \u2103 %.2f bars", getName(), getAmount(), getTemperature(), getPressure());

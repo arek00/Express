@@ -17,8 +17,8 @@ public class Grinder implements Device {
      * @param name name of device
      */
     public Grinder(String name) {
-        ArgumentsValidator.nullArgument(name);
-        ArgumentsValidator.emptyString(name);
+        ArgumentsValidator.notNull(name);
+        ArgumentsValidator.stringNotEmpty(name);
 
         this.name = name;
     }

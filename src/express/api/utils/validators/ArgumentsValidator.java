@@ -18,7 +18,7 @@ public class ArgumentsValidator {
      *
      * @param argument argument to check
      */
-    public static void nullArgument(Object argument) {
+    public static void notNull(Object argument) {
         if (argument == null) {
             throw new IllegalArgumentException("Given argument is null");
         }
@@ -26,14 +26,14 @@ public class ArgumentsValidator {
 
     /**
      * Method to check if given method may returns null.
-     * Unlike to nullArgument method, if this test is positive then
+     * Unlike to notNull method, if this test is positive then
      * NoSuchElementException is going to be thrown instead of IllegalArgumentException.
      * Method was created to prevent returns null in methods that search for elements in colleciton
      * by arguments like String.
      *
      * @param returnValue Value that method returns.
      */
-    public static void nullReturn(Object returnValue) {
+    public static void returnNotNull(Object returnValue) {
         if (returnValue == null) {
             throw new NoSuchElementException("Could not find such element");
         }
@@ -46,7 +46,7 @@ public class ArgumentsValidator {
      * @param collection Collection to check.
      * @param <T> Type of collection's elements
      */
-    public static <T> void emptyCollection(Collection<T> collection) {
+    public static <T> void collectionNotEmpty(Collection<T> collection) {
         if (collection.isEmpty()) {
             throw new IllegalArgumentException("Given collection is empty");
         }
@@ -58,7 +58,7 @@ public class ArgumentsValidator {
      * @param iterator Iterator to check.
      * @param <T> Type of iterator's elements
      */
-    public static <T> void emptyIterator(Iterator<T> iterator) {
+    public static <T> void iteratorNotEmpty(Iterator<T> iterator) {
         if (!iterator.hasNext()) {
             throw new IllegalArgumentException("Given iterator is empty");
         }
@@ -69,7 +69,7 @@ public class ArgumentsValidator {
      *
      * @param string String to check
      */
-    public static void emptyString(String string) {
+    public static void stringNotEmpty(String string) {
         if (string.isEmpty()) {
             throw new IllegalArgumentException("Given string is empty");
         }

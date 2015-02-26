@@ -9,6 +9,7 @@ import express.api.exceptions.DeviceException;
 import express.api.model.ingredients.Ingredient;
 import express.api.model.ingredients.Ingredients;
 import express.api.model.recipes.Recipe;
+import express.api.model.recipes.RecipeMaker;
 import express.api.model.recipes.Recipes;
 
 import java.util.Iterator;
@@ -35,12 +36,54 @@ public class MachineController {
     private Recipes recipes;
     private Containers containers;
     private BrewSequence brewStrategy;
+    private RecipeMaker recipeMaker;
 
     private MachineController() {
         devices = Devices.getInstance();
         ingredients = Ingredients.getInstance();
         recipes = Recipes.getInstance();
         containers = Containers.getInstance();
+        recipeMaker = RecipeMaker.getInstance();
+    }
+
+    public void addIngredientToMaker(Ingredient ingredient) {
+        recipeMaker.addIngredient(ingredient);
+    }
+
+    /**
+     * Add ingredient to current selected ingredients in maker.
+     *
+     * @param ingredient ingredient to add to recipe maker
+     */
+    public void addAdditiveToMaker(Ingredient ingredient) {
+        recipeMaker.addAdditive(ingredient);
+    }
+
+    /**
+     * Create recipe from given before ingredients and additives.
+     *
+     * @return recipe
+     */
+    public Recipe createRecipe() {
+        return recipeMaker.createRecipe();
+    }
+
+    /**
+     * Get iterator to selected ingredients.
+     *
+     * @return Iterator to ingredients
+     */
+    public Iterator<Ingredient> getAllIngredientsFromMaker() {
+        return recipeMaker.getAllIngredients();
+    }
+
+    /**
+     * Get iterator to selected additives
+     *
+     * @return
+     */
+    public Iterator<Ingredient> getAllAdditivesFromMaker() {
+        return recipeMaker.getAllAdditives();
     }
 
     /**
