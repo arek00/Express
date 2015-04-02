@@ -3,7 +3,7 @@ package express.example.implementation.exceptions;
 import express.api.exceptions.DeviceException;
 
 /**
- * Created by Admin on 2015-02-23.
+ * Exception that informs about problem with
  */
 public class IngredientInContainerNotSet extends DeviceException {
 

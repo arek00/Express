@@ -2,6 +2,7 @@ package express.example.implementation.presenter;
 
 import express.api.exceptions.DeviceException;
 import express.api.model.MachineController;
+import express.api.utils.validators.ArgumentsValidator;
 import express.example.implementation.view.IView;
 
 import javax.crypto.Mac;
@@ -16,23 +17,27 @@ public class Presenter {
     private MachineController model;
 
     /**
-     *
      * @param view
      * @param model
      */
     public Presenter(IView view, MachineController model) {
+        ArgumentsValidator.notNull(view);
+        ArgumentsValidator.notNull(model);
+
         this.model = model;
         this.view = view;
 
+        setListenersOnView();
+    }
+
+    private void setListenersOnView() {
         view.setRecipesListener(new RecipesListener());
         view.setIngredientsListener(new IngredientsListener());
         view.setIngredientListener(new AddIngredient());
         view.setAdditiveListener(new AddAdditive());
     }
 
-    /**
-     *
-     */
+
     class RecipesListener implements ActionListener {
 
         @Override

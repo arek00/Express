@@ -56,8 +56,6 @@ public class Heater implements Device {
         /*
         Tutaj powinno wykonywać jakąś operację z API producenta z ustawioną temperaturą.
          */
-
-        System.out.println("Podgrzewam");
     }
 
     /**

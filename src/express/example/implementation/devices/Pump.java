@@ -56,7 +56,6 @@ public class Pump implements Device {
         /*
         Pompuje wodę z danym ciśnieniem.
          */
-        System.out.println("Pompuję");
     }
 
     /**

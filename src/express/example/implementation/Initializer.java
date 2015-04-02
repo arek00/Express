@@ -12,7 +12,7 @@ import express.example.implementation.devices.*;
 import express.example.implementation.sequences.DefaultSequence;
 
 /**
- * Created by Admin on 2015-02-24.
+ *
  */
 public class Initializer {
 

@@ -33,7 +33,6 @@ public class Grinder implements Device {
         /*
         Mieli składnik...
          */
-        System.out.println("Mielę");
     }
 
     /**

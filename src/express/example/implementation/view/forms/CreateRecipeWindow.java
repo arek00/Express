@@ -18,14 +18,16 @@ import java.awt.event.ActionListener;
 /**
  * @author Arkadiusz Pikulski
  */
-public class CreateRecipeMenu extends JDialog {
+public class CreateRecipeWindow extends JDialog {
 
     private Ingredient ingredient;
     private ActionListener setIngredientListener;
     private ActionListener setAdditiveListener;
 
-    public CreateRecipeMenu(JFrame owner) {
-        super(owner);
+    /**
+     *
+     */
+    public CreateRecipeWindow() {
         initComponents();
         setListsListeners();
         addGranularButton.addActionListener(new HidePanelsListener());
@@ -37,26 +39,52 @@ public class CreateRecipeMenu extends JDialog {
         ingredientsList.addListSelectionListener(new IngredientsListListener(ingredientsList));
     }
 
+    /**
+     * Set elements to put it on  ingredients list
+     *
+     * @param items
+     */
     public void setIngredientsList(Object[] items) {
         ingredientsList.setListData(items);
     }
 
+    /**
+     * Set elements to put it on  additives list
+     *
+     * @param items
+     */
     public void setAdditivesList(Object[] items) {
         additivesList.setListData(items);
     }
+
 
     public void addSetIngredientListener(ActionListener listener) {
         this.setIngredientListener = listener;
     }
 
+    /**
+     * Set listener to setting additives on recipe maker.
+     *
+     * @param listener
+     */
     public void addSetAdditiveListener(ActionListener listener) {
         this.setAdditiveListener = listener;
     }
 
+    /**
+     * Get selected ingredient in order to put ingredient to recipe maker.
+     *
+     * @return ingredient
+     */
     public Ingredient getIngredient() {
         return ingredient;
     }
 
+    /**
+     * Get selected additive in order to put ingredient to recipe maker.
+     *
+     * @return ingredient
+     */
     public Ingredient getAdditive() {
         return ingredient;
     }
@@ -315,6 +343,9 @@ public class CreateRecipeMenu extends JDialog {
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
 
+    /**
+     * Listener that observes selections on JLists
+     */
     class IngredientsListListener implements ListSelectionListener {
         private JList list;
 
@@ -382,15 +413,21 @@ public class CreateRecipeMenu extends JDialog {
         }
     }
 
+    /**
+     * Listenet to hiding forms
+     */
     class HidePanelsListener implements ActionListener {
-
         @Override
         public void actionPerformed(ActionEvent e) {
             hidePanels();
         }
-
     }
 
+    /**
+     * Set recipe description on TextArea element.
+     *
+     * @param description
+     */
     public void setRecipeDescription(String description) {
         currentRecipe.setText(description);
     }

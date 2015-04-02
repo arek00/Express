@@ -3,10 +3,10 @@ package express.example.implementation;
 import express.api.model.MachineController;
 import express.example.implementation.presenter.Presenter;
 import express.example.implementation.sequences.DefaultSequence;
-import express.example.implementation.view.GraphicsView;
+import express.example.implementation.view.View;
 
 /**
- * Created by Admin on 2015-02-23.
+ * Starter of application.
  */
 public class Starter {
 
@@ -21,7 +21,7 @@ public class Starter {
         MachineController model = MachineController.getInstance();
         model.setBrewStrategy(new DefaultSequence());
 
-        GraphicsView view = new GraphicsView();
+        View view = new View();
         Presenter presenter = new Presenter(view, model);
 
     }

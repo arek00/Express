@@ -17,8 +17,7 @@ import java.awt.event.ActionListener;
  * @author Arkadiusz Pikulski
  */
 public class SelectRecipeMenu extends JDialog {
-    public SelectRecipeMenu(JFrame owner) {
-        super(owner);
+    public SelectRecipeMenu() {
         initComponents();
     }
 
@@ -89,6 +88,8 @@ public class SelectRecipeMenu extends JDialog {
     }
 
     public void setRecipes(Object[] items) {
+        ArgumentsValidator.notNull(items);
+
         recipesList.setListData(items);
     }
 
@@ -108,6 +109,8 @@ public class SelectRecipeMenu extends JDialog {
     }
 
     public Recipe getSelectedRecipe() {
+        ArgumentsValidator.returnNotNull(recipesList.getSelectedValue());
+
         ArgumentsValidator.returnNotNull(recipesList.getSelectedValue());
         return (Recipe) recipesList.getSelectedValue();
     }
